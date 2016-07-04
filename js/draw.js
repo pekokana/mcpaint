@@ -16,7 +16,13 @@ window.addEventListener("load", function() {
         },
         penColor: "rgba(255,0,0,1)"
     }
+
+    // キャンバス
     var can = document.getElementById("myCanvas");
+
+    // ペースト
+    enablePasteForCanvas(can);
+
     can.addEventListener("mousemove", function draw(e) {
         if (!drawData.drawFlag) return;
         var x = e.clientX;
@@ -64,7 +70,7 @@ window.addEventListener("load", function() {
     });
 
     // スポイト
-    $('canvas').click(function(e) {
+    $('myCanvas').click(function(e) {
         var getspuit = $('#spuit').is(':checked');
         if (getspuit == true) {
             spuitImage = context.getImageData(startX, startY, 1, 1);
@@ -74,8 +80,8 @@ window.addEventListener("load", function() {
             spuit_color = 'rgb(' + r + ',' + g + ',' + b + ')';
         }
     });
-
 }, true);
+
 // 保存処理　(Canvas2Image)
 //　http://www.nihilogic.dk/labs/canvas2image/
 function saveData() {
