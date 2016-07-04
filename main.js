@@ -40,8 +40,13 @@ app.on('ready', function() {
     //     'node-integration': false
     // });
     // デバッグするためのDevToolsを表示
-    mainWindow.webContents.openDevTools();
-    //mainWindow.loadUrl('file://' + __dirname + '/index.html');
+    // mainWindow.webContents.openDevTools();
+
+    // 小さいウィンドウ
+    const windowManager = require('electron-window-manager');
+    var window_size = 'file://' + __dirname + '/page/window_size.html'
+    windowManager.open('home', 'キャンバスサイズ変更', window_size);
+
     mainWindow.loadURL('file://' + __dirname + '/index.html');
 
     mainWindow.on('closed', function() {
