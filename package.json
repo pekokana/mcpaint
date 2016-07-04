@@ -1,25 +1,26 @@
 {
-  "name": "mcpaint",
-  "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
-  "dependencies": {},
-  "devDependencies": {
-    "electron-prebuilt": "^1.2.5"
-  },
-  "scripts": {
-    "start": "node_modules/.bin/electron .",
-    "build": "node build.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/shinriyo/mcpaint.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/shinriyo/mcpaint/issues"
-  },
-  "homepage": "https://github.com/shinriyo/mcpaint#readme"
+    "name": "mcpaint",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "dependencies": {},
+    "devDependencies": {
+        "electron-window-manager": "^1.1.0",
+        "electron-prebuilt": "^1.2.5"
+    },
+    "scripts": {
+        "start": "node_modules/.bin/electron .",
+        "build": "node build.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/shinriyo/mcpaint.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/shinriyo/mcpaint/issues"
+    },
+    "homepage": "https://github.com/shinriyo/mcpaint#readme"
 }
