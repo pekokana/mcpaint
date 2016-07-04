@@ -31,10 +31,14 @@ function enablePasteForCanvas(canvas) {
     e.preventDefault();
   };
   
-  canvas.addEventListener("focus", function(e){
+  // Canvasにフォーカスが当たったらペーストイベントにコールバックを追加
+  //   canvas.addEventListener("focus", function(e){
+  canvas.addEventListener("mousedow", function(e){
     document.addEventListener("paste", pasteEvent, false);
   }, false);
-  canvas.addEventListener("blur", function(e){
+  // フォーカスが外れたらイベントからコールバックを削除
+  //   canvas.addEventListener("blur", function(e){
+  canvas.addEventListener("mouseup", function(e){
     document.removeEventListener("paste", pasteEvent, false);
   }, false);
 }
