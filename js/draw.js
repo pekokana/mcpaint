@@ -44,9 +44,9 @@ window.addEventListener("load", function() {
         drawData.drawFlag = false;
     }, true);
     // カラーパレット初期化
-    $("#colorPalet div").click(function(e) {
-        drawData.penColor = drawData.colorList[this.id];
-    });
+    // $("#colorPalet div").click(function(e) {
+    //     drawData.penColor = drawData.colorList[this.id];
+    // });
     // ブラシサイズの設定を行うスライダー
     $("#slider").slider({
         min: 0,
@@ -56,6 +56,25 @@ window.addEventListener("load", function() {
             drawData.brushSize = ui.value; // ブラシサイズを設定
         }
     });
+
+    // 色選択
+    $('li').click(function() {
+        // context.strokeStyle = $(this).css('background-color');
+        drawData.penColor = $(this).css('background-color');
+    });
+
+    // スポイト
+    $('canvas').click(function(e) {
+        var getspuit = $('#spuit').is(':checked');
+        if (getspuit == true) {
+            spuitImage = context.getImageData(startX, startY, 1, 1);
+            r = spuitImage.data[0];
+            g = spuitImage.data[1];
+            b = spuitImage.data[2];
+            spuit_color = 'rgb(' + r + ',' + g + ',' + b + ')';
+        }
+    });
+
 }, true);
 // 保存処理　(Canvas2Image)
 //　http://www.nihilogic.dk/labs/canvas2image/

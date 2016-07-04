@@ -15,3 +15,9 @@ npm start
 ## 参考
 
 http://wing.w-museum.com/201201251538.html
+
+## W.I.P
+
+スポイト
+選択ツール
+バケツツール
