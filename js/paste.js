@@ -37,8 +37,10 @@ function enablePasteForCanvas(canvas) {
         document.addEventListener("paste", pasteEvent, false);
     }, false);
     // フォーカスが外れたらイベントからコールバックを削除
-    //   canvas.addEventListener("blur", function(e){
-    canvas.addEventListener("mouseup", function(e) {
+    // canvas.addEventListener("blur", function(e){
+    // canvas.addEventListener("mouseup", function(e) {
+    document.addEventListener("mousedown", function(e) {
+        // ドキュメント上だと外れたことになる
         document.removeEventListener("paste", pasteEvent, false);
     }, false);
 }

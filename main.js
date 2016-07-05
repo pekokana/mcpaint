@@ -86,8 +86,17 @@ app.on('ready', function() {
             click: function() {
                 showResize();
             }
+        }, {
+            label: "Copy",
+            accelerator: "CmdOrCtrl+C",
+            selector: "copy:"
+        }, {
+            label: "Paste",
+            accelerator: "CmdOrCtrl+V",
+            selector: "paste:"
         }]
     }];
+    // https://pracucci.com/atom-electron-enable-copy-and-paste.html
     // これをするとメニューが上書きされてくれる
     const menu = Menu.buildFromTemplate(template)
     Menu.setApplicationMenu(menu);
