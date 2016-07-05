@@ -59,6 +59,8 @@ window.addEventListener("load", function() {
             drawData.brushSize = ui.value; // ブラシサイズを設定
         }
     });
+    // 要らないので消す
+    $("#slider").hide();
 
     // スポイト
     $('canvas').click(function(e) {
