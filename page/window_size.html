@@ -1,5 +1,18 @@
 <!DOCTYPE html>
 <html lang="ja">
+<script type="text/javascript">
+    function submit(frm) {
+        windowManager.getCurrent().close();
+        if (frm.elements["x"].value == "") {
+            alert("テキストボックスに入力してください");
+            /* FALSEを返してフォームは送信しない */
+            return false;
+        } else {
+            /* TRUEを返してフォーム送信 */
+            return true;
+        }
+    }
+</script>
 
 <head>
     <meta charset="utf-8">
@@ -8,6 +21,12 @@
 
 <body>
     ウィンドウのサイズ変更
+    <form onsubmit="return submit(this)">
+        <div>
+            x:<input type="text" size="30" name="x"> y:<input type="text" size="40" name="y">
+        </div>
+        <input type="submit" value="決定">
+    </form>
 </body>
 
 </html>
