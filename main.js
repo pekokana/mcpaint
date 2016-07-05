@@ -21,9 +21,15 @@ app.on('window-all-closed', function() {
         app.quit();
 });
 
-function setupMenu(template) {
-    const menu = Menu.buildFromTemplate(template)
-    Menu.setApplicationMenu(menu)
+// リサイズ画面
+function showResize() {
+    const windowManager = require('electron-window-manager');
+    var new_win = 'file://' + __dirname + '/page/window_size.html'
+    windowManager.open('Resize', 'キャンバスサイズ変更', new_win);
+    var win = windowManager.get('Resize');
+
+    // 大きさ変更
+    win.resize(300, 200).restore();
 }
 app.on('ready', function() {
 
@@ -50,25 +56,37 @@ app.on('ready', function() {
         }, ]
     }, {
         label: 'View',
+        submenu: [
+            /*{
+                        label: 'Reload',
+                        accelerator: 'Command+R',
+                        click: function() {
+                            mainWindow.restart();
+                        }
+                    }, */
+            {
+                label: 'Toggle Full Screen',
+                accelerator: 'Ctrl+Command+F',
+                click: function() {
+                    mainWindow.setFullScreen(!mainWindow.isFullScreen());
+                }
+            }, {
+                label: 'Toggle Developer Tools',
+                accelerator: 'Alt+Command+I',
+                click: function() {
+                    mainWindow.toggleDevTools();
+                }
+            },
+        ]
+    }, {
+        label: 'Edit',
         submenu: [{
-            label: 'Reload',
-            accelerator: 'Command+R',
+            label: 'Resize',
+            accelerator: 'Command+E',
             click: function() {
-                mainWindow.restart();
+                showResize();
             }
-        }, {
-            label: 'Toggle Full Screen',
-            accelerator: 'Ctrl+Command+F',
-            click: function() {
-                mainWindow.setFullScreen(!mainWindow.isFullScreen());
-            }
-        }, {
-            label: 'Toggle Developer Tools',
-            accelerator: 'Alt+Command+I',
-            click: function() {
-                mainWindow.toggleDevTools();
-            }
-        }, ]
+        }]
     }];
     // これをするとメニューが上書きされてくれる
     const menu = Menu.buildFromTemplate(template)
@@ -77,7 +95,7 @@ app.on('ready', function() {
     // 小さいウィンドウ
     if (false) {
         const windowManager = require('electron-window-manager');
-        var window_size = 'file://' + __dirname + '/page/window_size.html'
+        var window_size = 'file://' + __dirname + '/page/hpme.html'
         windowManager.open('home', 'キャンバスサイズ変更', window_size);
     }
     mainWindow.loadURL('file://' + __dirname + '/index.html');
