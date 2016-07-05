@@ -1,3 +1,5 @@
+'use strict';
+
 $(function() {
     var offset = 5;
     var startX;

@@ -1,6 +1,7 @@
 'use strict';
 
 const electron = require("electron");
+const Menu = electron.Menu;
 const {
     crashReporter
 } = require('electron');
@@ -20,6 +21,10 @@ app.on('window-all-closed', function() {
         app.quit();
 });
 
+function setupMenu(template) {
+    const menu = Menu.buildFromTemplate(template)
+    Menu.setApplicationMenu(menu)
+}
 app.on('ready', function() {
 
     // ブラウザ(Chromium)の起動, 初期画面のロード
@@ -34,12 +39,47 @@ app.on('ready', function() {
 
     // デバッグするためのDevToolsを表示
     // mainWindow.webContents.openDevTools();
+    var template = [{
+        label: 'Electron',
+        submenu: [{
+            label: 'Quit',
+            accelerator: 'Command+Q',
+            click: function() {
+                app.quit();
+            }
+        }, ]
+    }, {
+        label: 'View',
+        submenu: [{
+            label: 'Reload',
+            accelerator: 'Command+R',
+            click: function() {
+                mainWindow.restart();
+            }
+        }, {
+            label: 'Toggle Full Screen',
+            accelerator: 'Ctrl+Command+F',
+            click: function() {
+                mainWindow.setFullScreen(!mainWindow.isFullScreen());
+            }
+        }, {
+            label: 'Toggle Developer Tools',
+            accelerator: 'Alt+Command+I',
+            click: function() {
+                mainWindow.toggleDevTools();
+            }
+        }, ]
+    }];
+    // これをするとメニューが上書きされてくれる
+    const menu = Menu.buildFromTemplate(template)
+    Menu.setApplicationMenu(menu);
 
     // 小さいウィンドウ
-    const windowManager = require('electron-window-manager');
-    var window_size = 'file://' + __dirname + '/page/window_size.html'
-    windowManager.open('home', 'キャンバスサイズ変更', window_size);
-
+    if (false) {
+        const windowManager = require('electron-window-manager');
+        var window_size = 'file://' + __dirname + '/page/window_size.html'
+        windowManager.open('home', 'キャンバスサイズ変更', window_size);
+    }
     mainWindow.loadURL('file://' + __dirname + '/index.html');
 
     mainWindow.on('closed', function() {
