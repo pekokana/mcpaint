@@ -14,8 +14,8 @@ $(function() {
     var picker = $.farbtastic('#colorpicker');
     picker.linkTo($("#color"));
 
+    // 背景色系
     $('#back1').click(function(e) {
-        alert(1);
         $('canvas').css({
             'background-color': '#FFFFFF',
             'background-image': 'none'

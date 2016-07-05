@@ -1,0 +1,75 @@
+﻿body {
+    margin: 20px;
+}
+canvas {
+    top: 20px;
+    left: 20px;
+    border: 5px solid #ccc;
+    margin: 0px 0px 10px 0px;
+}
+#button {
+    position: relative;
+clear: both;
+}
+#button img { vertical-align:middle; }
+#save {
+
+}
+#clear {
+
+}
+#colorlist {
+    position: absolute;
+    top: 20px;
+    left: 550px;
+    width: 220px;
+}
+ul {
+    margin: 10 0 0 0;
+    padding: 0;
+    list-style: none;
+}
+li {
+    cursor:pointer;
+    cursor:hand;
+    display:inline-block;
+    margin: 0;
+    padding: 0;
+    width: 15px;
+    height: 15px;
+}
+#colorpick {
+    width: 220px;
+    color : #123456;
+}
+#color {
+    width: 70px;
+    height: 40px;
+    border: 1px solid #000000;
+}
+
+.ofclic { border:1px #FFFFFF solid }
+.clic { border:1px #000000 solid }
+
+#brush1, #brush2, #brush3, #brush4, #miter, #eraser {
+    cursor:pointer;
+    cursor:hand;
+}
+label {
+    cursor:pointer;
+    cursor:hand;
+}
+#bwbox {
+    margin: 20px 0px 20px 0px;
+    font-size:13px;
+}
+#bw,#alpha {
+    display:inline-block;
+    width: 30px;
+    height: 17px;
+    border: 1px solid #BBBBBB;
+}
+#slider,#slider2 {
+    margin: -18px 0px 0px 110px;
+    width: 380px;
+}
