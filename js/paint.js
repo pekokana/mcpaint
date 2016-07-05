@@ -9,6 +9,9 @@ $(function() {
     var brushColor = '#000000';
     var flag = false;
     var canvas = $('canvas').get(0);
+    var getImage;
+    var undoImage;
+
     if (canvas.getContext) {
         var context = canvas.getContext('2d');
     }
@@ -226,8 +229,8 @@ $(function() {
 
     // 動かない
     // $('canvas').on('mouseleave', function() {
-    //     getImage = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
-    //     flag = false;
+    // getImage = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
+    // flag = false;
     // });
 
     $('#undo').click(function(e) {
