@@ -12,7 +12,7 @@
     <script type="text/javascript" src="js/canvas2image.js"></script>
     <script type="text/javascript" src="js/paste.js"></script>
     <script type="text/javascript" src="js/draw.js"></script>
-    <script type="text/javascript" src="js/paint .js"></script>
+    <script type="text/javascript" src="js/paint.js"></script>
 </head>
 
 <body>
@@ -28,36 +28,27 @@
             <input type="radio" name="brush" id="miter" /><label for="miter"><img src="icon/penm.png" alt="角ペン" title="角ペン"></label>
             <input type="radio" name="brush" id="eraser" /><label for="eraser"><img src="icon/erase.png" alt="消しゴム" title="消しゴム"></label>
             <input type="radio" name="brush" id="spuit" /><label for="spuit"><img src="icon/spuit.png" alt="スポイト" title="スポイト"></label>
+            <input type="radio" name="brush" id="bucket" /><label for="bucket"><img src="icon/bucket.png" alt="バケツ" title="バケツ"></label>
         </div>
         <div id="slider"></div>
         <br>
         <button onclick="saveData()">保存</button>
-    </div>
-    <div id="button">
         <input type="button" id="back1" value="白背景" />
         <input type="button" id="back2" value="黒背景" />
         <input type="button" id="back3" value="透明" />
     </div>
-    <ul>
-        <li style="background-color:#000"></li>
-        <li style="background-color:#f00"></li>
-        <li style="background-color:#0f0"></li>
-        <li style="background-color:#00f"></li>
-        <li style="background-color:#ff0"></li>
-        <!-- 追加 -->
-        <li style="background-color:#ff0"></li>
-        <li style="background-color:#ff0"></li>
-    </ul>
-    <!--<div id="colorPalet">
-        <div id="black"></div>
-        <div id="blue"></div>
-        <div id="red"></div>
-        <div id="magenta"></div>
-        <div id="green"></div>
-        <div id="cyan"></div>
-        <div id="yellow"></div>
-        <div id="white"></div>
-    </div>-->
+    <div id="colorlist">
+        <ul>
+            <li style="background-color:#000"></li>
+            <li style="background-color:#f00"></li>
+            <li style="background-color:#0f0"></li>
+            <li style="background-color:#00f"></li>
+            <li style="background-color:#ff0"></li>
+            <!-- 追加 -->
+            <li style="background-color:#ff0"></li>
+            <li style="background-color:#ff0"></li>
+        </ul>
+    </div>
 </body>
 
 </html>

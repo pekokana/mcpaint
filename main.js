@@ -1,12 +1,5 @@
 'use strict';
 
-/* 古い
-var electron = require('electron');
-var app = electron.app;
-var BrowserWindow = electron.BrowserWindow;
-var mainWindow = null;
-require('crash-reporter').start();
-*/
 const electron = require("electron");
 const {
     crashReporter
@@ -32,13 +25,13 @@ app.on('ready', function() {
     // ブラウザ(Chromium)の起動, 初期画面のロード
     mainWindow = new BrowserWindow({
         width: 800,
-        height: 600
+        height: 600,
+        title: "MCペイント",
+        // frame: false,
+        // resizable: false,
+        // transparent: true,
     });
-    // mainWindow = new BrowserWindow({
-    //     width: 800,
-    //     height: 600,
-    //     'node-integration': false
-    // });
+
     // デバッグするためのDevToolsを表示
     // mainWindow.webContents.openDevTools();
 
