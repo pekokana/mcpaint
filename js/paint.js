@@ -40,6 +40,8 @@ $(function() {
             $("#bw").val(brushSize);
         }
     });
+    // 消す
+    $("#slider").hide();
 
     $('#slider2').slider({
         min: 1,
@@ -73,6 +75,7 @@ $(function() {
         $(this).addClass('clic');
     });
 
+    // スポイト
     $('canvas').click(function(e) {
         var getspuit = $('#spuit').is(':checked');
         if (getspuit == true) {
@@ -219,10 +222,11 @@ $(function() {
         flag = false;
     });
 
-    $('canvas').on('mouseleave', function() {
-        getImage = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
-        flag = false;
-    });
+    // 動かない
+    // $('canvas').on('mouseleave', function() {
+    //     getImage = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
+    //     flag = false;
+    // });
 
     $('#undo').click(function(e) {
         context.putImageData(undoImage, 0, 0);

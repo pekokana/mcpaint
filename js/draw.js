@@ -50,29 +50,6 @@ window.addEventListener("load", function() {
     window.addEventListener("mouseup", function() { // キャンバスでなくウィンドウに
         drawData.drawFlag = false;
     }, true);
-    // ブラシサイズの設定を行うスライダー
-    $("#slider").slider({
-        min: 0,
-        max: 100, // ブラシの最大サイズ
-        value: 1, // 最初のブラシサイズ
-        slide: function(evt, ui) {
-            drawData.brushSize = ui.value; // ブラシサイズを設定
-        }
-    });
-    // 要らないので消す
-    $("#slider").hide();
-
-    // スポイト
-    $('canvas').click(function(e) {
-        var getspuit = $('#spuit').is(':checked');
-        if (getspuit == true) {
-            spuitImage = context.getImageData(startX, startY, 1, 1);
-            r = spuitImage.data[0];
-            g = spuitImage.data[1];
-            b = spuitImage.data[2];
-            spuit_color = 'rgb(' + r + ',' + g + ',' + b + ')';
-        }
-    });
 }, true);
 
 // 保存処理　(Canvas2Image)
@@ -80,4 +57,12 @@ window.addEventListener("load", function() {
 function saveData() {
     var can = document.getElementById("canvas");
     Canvas2Image.saveAsPNG(can); // PNG形式で保存
+}
+
+// TODO: リサイズ
+function resizeCanvas() {
+    var w = 10;
+    var h = 10;
+    $('#canvas').attr('width', w);
+    $('#canvas').attr('height', h);
 }
