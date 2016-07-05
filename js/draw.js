@@ -18,16 +18,16 @@ window.addEventListener("load", function() {
     }
 
     // キャンバス
-    var can = document.getElementById("myCanvas");
+    var canvas = document.getElementById("canvas");
 
     // ペースト
-    enablePasteForCanvas(can);
+    enablePasteForCanvas(canvas);
 
-    can.addEventListener("mousemove", function draw(e) {
+    canvas.addEventListener("mousemove", function draw(e) {
         if (!drawData.drawFlag) return;
         var x = e.clientX;
         var y = e.clientY;
-        var can = document.getElementById("myCanvas");
+        var can = document.getElementById("canvas");
         var context = can.getContext("2d");
         context.strokeStyle = drawData.penColor;
         context.lineWidth = drawData.brushSize;
@@ -41,7 +41,7 @@ window.addEventListener("load", function() {
         drawData.oldX = x;
         drawData.oldY = y;
     }, true);
-    can.addEventListener("mousedown", function(e) {
+    canvas.addEventListener("mousedown", function(e) {
         drawData.drawFlag = true;
         drawData.oldX = e.clientX;
         drawData.oldY = e.clientY;
@@ -70,7 +70,7 @@ window.addEventListener("load", function() {
     });
 
     // スポイト
-    $('myCanvas').click(function(e) {
+    $('canvas').click(function(e) {
         var getspuit = $('#spuit').is(':checked');
         if (getspuit == true) {
             spuitImage = context.getImageData(startX, startY, 1, 1);
@@ -85,6 +85,6 @@ window.addEventListener("load", function() {
 // 保存処理　(Canvas2Image)
 //　http://www.nihilogic.dk/labs/canvas2image/
 function saveData() {
-    var can = document.getElementById("myCanvas");
+    var can = document.getElementById("canvas");
     Canvas2Image.saveAsPNG(can); // PNG形式で保存
 }
