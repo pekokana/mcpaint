@@ -55,14 +55,19 @@ window.addEventListener("load", function() {
 // 保存処理　(Canvas2Image)
 //　http://www.nihilogic.dk/labs/canvas2image/
 function saveData() {
-    var can = document.getElementById("canvas");
-    Canvas2Image.saveAsPNG(can); // PNG形式で保存
+    // var canvas = document.getElementById("canvas");
+    Canvas2Image.saveAsPNG($('#canvas')); // PNG形式で保存
 }
 
 // TODO: リサイズ
 function resizeCanvas() {
-    var w = 10;
-    var h = 10;
+
+    // 虫眼鏡
+    var w = 110;
+    var h = 110;
     $('#canvas').attr('width', w);
     $('#canvas').attr('height', h);
+
+    $("#canvas").width(w);
+    $("#canvas").height(h);
 }
