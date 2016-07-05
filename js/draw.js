@@ -41,18 +41,15 @@ window.addEventListener("load", function() {
         drawData.oldX = x;
         drawData.oldY = y;
     }, true);
-    canvas.addEventListener("mousedown", function(e) {
-        drawData.drawFlag = true;
-        drawData.oldX = e.clientX;
-        drawData.oldY = e.clientY;
-    }, true);
+    // これがあると二重
+    // canvas.addEventListener("mousedown", function(e) {
+    //     drawData.drawFlag = true;
+    //     drawData.oldX = e.clientX;
+    //     drawData.oldY = e.clientY;
+    // }, true);
     window.addEventListener("mouseup", function() { // キャンバスでなくウィンドウに
         drawData.drawFlag = false;
     }, true);
-    // カラーパレット初期化
-    // $("#colorPalet div").click(function(e) {
-    //     drawData.penColor = drawData.colorList[this.id];
-    // });
     // ブラシサイズの設定を行うスライダー
     $("#slider").slider({
         min: 0,
@@ -61,12 +58,6 @@ window.addEventListener("load", function() {
         slide: function(evt, ui) {
             drawData.brushSize = ui.value; // ブラシサイズを設定
         }
-    });
-
-    // 色選択
-    $('li').click(function() {
-        // context.strokeStyle = $(this).css('background-color');
-        drawData.penColor = $(this).css('background-color');
     });
 
     // スポイト

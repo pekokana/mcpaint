@@ -67,7 +67,7 @@ $(function() {
 
     $('li').addClass('ofclic');
     $('li').click(function() {
-        clic_color = new RGBColor($(this).css('background-color'));
+        var clic_color = new RGBColor($(this).css('background-color'));
         picker.setColor(clic_color.toHex());
         $('li').removeClass('clic');
         $(this).addClass('clic');
@@ -99,6 +99,8 @@ $(function() {
             var endY = e.pageY - $('canvas').offset().top - offset;
 
             var brushColor = picker.color;
+
+            // それぞれの切り替え
             var getBrush1 = $('#brush1').is(':checked');
             var getBrush2 = $('#brush2').is(':checked');
             var getBrush3 = $('#brush3').is(':checked');
@@ -211,7 +213,8 @@ $(function() {
         }
     });
 
-    $('canvas').on('mouseup', function() {
+    // $('canvas').on('mouseup', function() {
+    window.addEventListener("mouseup", function() { // キャンバスでなくウィンドウに
         getImage = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
         flag = false;
     });
