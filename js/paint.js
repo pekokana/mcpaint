@@ -80,16 +80,26 @@ $(function() {
         $(this).addClass('clic');
     });
 
-    // スポイト
+    // スポイト or バケツ
     $('canvas').click(function(e) {
         var getspuit = $('#spuit').is(':checked');
+        var getBucket = $('#bucket').is(':checked');
+
         if (getspuit == true) {
+            // スポイト
             spuitImage = context.getImageData(startX, startY, 1, 1);
             r = spuitImage.data[0];
             g = spuitImage.data[1];
             b = spuitImage.data[2];
             spuit_color = new RGBColor('rgb(' + r + ',' + g + ',' + b + ')');
             picker.setColor(spuit_color.toHex());
+        } else if (getBucket == true) {
+            // バケツ
+            var point = getPointFromEvent(event);
+            var cfa = new CanvasFillAlgorithm(canvas);
+            // cfa.setColorDistance(document.getElementById('rgbdistance').valueAsNumber);
+            // cfa.setAlphaDistance(document.getElementById('alphadistance').valueAsNumber);
+            cfa.paint(point.x, point.y, getFillColor());
         }
     });
 
@@ -100,6 +110,39 @@ $(function() {
         startY = e.pageY - $(this).offset().top - offset;
         return false; // for chrome
     });
+
+    // マウス位置
+    function getPointFromEvent(event) {
+        var boundingRect = event.target.getBoundingClientRect();
+
+        return {
+            x: event.clientX - boundingRect.left | 0,
+            y: event.clientY - boundingRect.top | 0
+        }
+    }
+
+    function getFillColor() {
+        // var red = document.getElementById('fill_red').valueAsNumber;
+        // var green = document.getElementById('fill_green').valueAsNumber;
+        // var blue = document.getElementById('fill_blue').valueAsNumber;
+        // var alpha = document.getElementById('fill_alpha').valueAsNumber;
+        // おかしい
+        var red = picker.color.red;
+        var green = picker.color.green;
+        var blue = picker.color.blue;
+        var alpha = picker.color.alpha;
+        console.log(red);
+        console.log(green);
+        console.log(blue);
+        console.log(alpha);
+
+        return (
+            (red << 24) |
+            (green << 16) |
+            (blue << 8) |
+            (alpha)
+        ) >>> 0;
+    }
 
     $('canvas').mousemove(function(e) {
         if (flag) {
@@ -116,8 +159,8 @@ $(function() {
             var getBrushm = $('#miter').is(':checked');
             var getEeraser = $('#eraser').is(':checked');
 
-            //ブラシ（通常）
             if (getBrush1 == true) {
+                //ブラシ（通常）
                 context.globalAlpha = alphaSize;
                 context.beginPath();
                 context.globalCompositeOperation = 'source-over';
@@ -131,9 +174,8 @@ $(function() {
                 context.lineTo(endX, endY);
                 context.stroke();
                 context.closePath();
-
-                //ブラシ（ぼかし１）
             } else if (getBrush2 == true) {
+                //ブラシ（ぼかし１）
                 context.globalAlpha = alphaSize;
                 context.beginPath();
                 context.globalCompositeOperation = 'source-over';
@@ -148,9 +190,8 @@ $(function() {
                 context.lineTo(endX, endY);
                 context.stroke();
                 context.closePath();
-
-                //ブラシ（ぼかし２）
             } else if (getBrush3 == true) {
+                //ブラシ（ぼかし２）
                 brushSizex2 = brushSize + brushSize;
                 context.globalAlpha = alphaSize;
                 context.beginPath();
@@ -166,9 +207,8 @@ $(function() {
                 context.lineTo(endX, endY);
                 context.stroke();
                 context.closePath();
-
-                //ブラシ（パステル）
             } else if (getBrush4 == true) {
+                //ブラシ（パステル）
                 context.globalAlpha = 0.1;
                 context.beginPath();
                 context.globalCompositeOperation = 'source-over';
@@ -184,8 +224,8 @@ $(function() {
                 context.stroke();
                 context.closePath();
 
-                //ブラシ（四角）
             } else if (getBrushm == true) {
+                //ブラシ（四角）
                 context.globalAlpha = alphaSize;
                 context.beginPath();
                 context.globalCompositeOperation = 'source-over';
@@ -199,9 +239,8 @@ $(function() {
                 context.lineTo(endX, endY);
                 context.stroke();
                 context.closePath();
-
-                //消しゴム
             } else if (getEeraser == true) {
+                //消しゴム
                 context.globalAlpha = 1;
                 context.beginPath();
                 context.globalCompositeOperation = 'destination-out';
@@ -216,6 +255,7 @@ $(function() {
                 context.stroke();
                 context.closePath();
             }
+
             startX = endX;
             startY = endY;
         }
