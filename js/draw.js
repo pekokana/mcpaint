@@ -27,6 +27,7 @@ window.addEventListener("load", function() {
     // ペースト
     enablePasteForCanvas(canvas);
 
+    // 今使ってない？？
     canvas.addEventListener("mousemove", function draw(e) {
         if (!drawData.drawFlag) return;
         var x = e.clientX;

@@ -1,5 +1,15 @@
 'use strict';
 
+// マウス位置
+function getPointFromEvent(event) {
+    var boundingRect = event.target.getBoundingClientRect();
+
+    return {
+        x: event.clientX - boundingRect.left | 0,
+        y: event.clientY - boundingRect.top | 0
+    }
+}
+
 $(function() {
     var offset = 5;
     var startX;
@@ -111,15 +121,15 @@ $(function() {
         return false; // for chrome
     });
 
-    // マウス位置
-    function getPointFromEvent(event) {
-        var boundingRect = event.target.getBoundingClientRect();
+    // // マウス位置
+    // function getPointFromEvent(event) {
+    //     var boundingRect = event.target.getBoundingClientRect();
 
-        return {
-            x: event.clientX - boundingRect.left | 0,
-            y: event.clientY - boundingRect.top | 0
-        }
-    }
+    //     return {
+    //         x: event.clientX - boundingRect.left | 0,
+    //         y: event.clientY - boundingRect.top | 0
+    //     }
+    // }
 
     function getFillColor() {
         // #DFB73Aからの変換
@@ -127,7 +137,7 @@ $(function() {
         var red = color.r;
         var green = color.g;
         var blue = color.b;
-        // TODO:
+        // TODO: 今はアルファはない
         var alpha = 255;
 
         return (

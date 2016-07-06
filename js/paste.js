@@ -1,5 +1,9 @@
 //指定したCanvasがペーストを受け付けるようにする。
 function enablePasteForCanvas(canvas) {
+    var mousePos = {
+        x: 0,
+        y: 0
+    };
     var pasteEvent = function(e) {
         (function() {
             var i;
@@ -24,7 +28,9 @@ function enablePasteForCanvas(canvas) {
             img.onload = function() {
                 //Imageをキャンバスに描画
                 var context = canvas.getContext("2d");
-                context.drawImage(img, 0, 0);
+                // context.drawImage(img, 0, 0);
+                // 押下した位置へ
+                context.drawImage(img, mousePos.x, mousePos.y);
             };
             img.src = blobURL;
         }());
@@ -35,6 +41,7 @@ function enablePasteForCanvas(canvas) {
     //   canvas.addEventListener("focus", function(e){
     canvas.addEventListener("mousedown", function(e) {
         document.addEventListener("paste", pasteEvent, false);
+        mousePos = getPointFromEvent(e);
     }, false);
     // フォーカスが外れたらイベントからコールバックを削除
     // canvas.addEventListener("blur", function(e){
@@ -49,7 +56,7 @@ function enablePasteForCanvas(canvas) {
 }
 
 //==========
-// kinetic
+// TODO: kinetic
 function setupKinetic(canvas) {
     function update(activeAnchor) {
         var group = activeAnchor.getParent();
