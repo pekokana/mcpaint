@@ -122,19 +122,13 @@ $(function() {
     }
 
     function getFillColor() {
-        // var red = document.getElementById('fill_red').valueAsNumber;
-        // var green = document.getElementById('fill_green').valueAsNumber;
-        // var blue = document.getElementById('fill_blue').valueAsNumber;
-        // var alpha = document.getElementById('fill_alpha').valueAsNumber;
-        // おかしい
-        var red = picker.color.red;
-        var green = picker.color.green;
-        var blue = picker.color.blue;
-        var alpha = picker.color.alpha;
-        console.log(red);
-        console.log(green);
-        console.log(blue);
-        console.log(alpha);
+        // #DFB73Aからの変換
+        var color = new RGBColor(picker.color);
+        var red = color.r;
+        var green = color.g;
+        var blue = color.b;
+        // TODO:
+        var alpha = 255;
 
         return (
             (red << 24) |
