@@ -23,17 +23,17 @@
 </head>
 
 <body>
-    <div id="container"></div>
     <canvas id="canvas" width="640" height="480">
         HTML5　Canvasに対応したブラウザーを使用してください。
     </canvas>
     <!-- 矩形選択 -->
-    <canvas id="display" class="display" width="1280" height="720"></canvas>
-    <canvas id="drowing" class="drowing" width="1280" height="720"></canvas>
+    <canvas id="display" width="640" height="480"></canvas>
+    <canvas id="drawing" width="640" height="480"></canvas>
+    <div id="container"></div>
     <script type="text/javascript">
         var display = document.getElementById("display");
-        var drowing = document.getElementById("drowing");
-        var instance = new app(display, drowing);
+        var drawing = document.getElementById("drawing");
+        var instance = new app(display, drawing);
     </script>
 
     <div id="menu">
