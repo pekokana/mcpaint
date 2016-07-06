@@ -17,6 +17,7 @@
     <script type="text/javascript" src="farbtastic/farbtastic.js"></script>
     <script type="text/javascript" src="js/rgbcolor.js"></script>
     <script type="text/javascript" src="js/paint.js"></script>
+    <script type="text/javascript" src="js/selection.js"></script>
     <script type="text/javascript" src="js/kinetic-v5.0.1.min.js"></script>
     <script type="text/javascript" src="js/kPF1v.js"></script>
 </head>
@@ -25,9 +26,18 @@
     <canvas id="canvas" width="640" height="480">
         HTML5　Canvasに対応したブラウザーを使用してください。
     </canvas>
+    <!-- 矩形選択 -->
+    <canvas id="display" class="display" width="1280" height="720"></canvas>
+    <canvas id="drowing" class="drowing" width="1280" height="720"></canvas>
+    <script type="text/javascript">
+        var display = document.getElementById("display");
+        var drowing = document.getElementById("drowing");
+        var instance = new app(display, drowing);
+    </script>
+
     <div id="menu">
         <div id="button">
-            <input type="radio" name="brush" id="selection" checked="checked" /><label for="selection"><img src="icon/brush1.png" alt="範囲選択" title="範囲選択"></label>
+            <input type="radio" name="brush" id="selection" checked="checked" /><label for="selection"><img src="icon/selection.png" alt="範囲選択" title="範囲選択"></label>
             <input type="radio" name="brush" id="brush1" /><label for="brush1"><img src="icon/brush1.png" alt="ブラシ" title="ブラシ"></label>
             <!--<input type="radio" name="brush" id="brush2" /><label for="brush2"><img src="pen2.gif" alt="ぼかし１" title="ぼかし１"></label>
             <input type="radio" name="brush" id="brush3" /><label for="brush3"><img src="pen3.gif" alt="ぼかし２" title="ぼかし２"></label>-->

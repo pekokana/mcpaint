@@ -1,3 +1,5 @@
+'use strict';
+
 //指定したCanvasがペーストを受け付けるようにする。
 function enablePasteForCanvas(canvas) {
     var mousePos = {
