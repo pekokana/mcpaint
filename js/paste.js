@@ -163,14 +163,15 @@ function setupKinetic(canvas) {
                     callback(images);
                 }
             };
-            // TODO: なぜかエラー
-            // images[src].src = sources[src];
+
+            images[src].src = sources[src];
         }
     }
 
     function initStage(images) {
         var stage = new Kinetic.Stage({
             container: 'container',
+            // container: 'canvas',
             width: 578,
             height: 400
         });
