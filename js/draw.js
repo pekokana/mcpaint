@@ -1,5 +1,7 @@
 'use strict';
 
+// main.jsから受信用
+const ipcRenderer = require('electron').ipcRenderer;
 window.addEventListener("load", function() {
     var drawData = {
         drawFlag: false,
@@ -57,9 +59,13 @@ window.addEventListener("load", function() {
 // 保存処理　(Canvas2Image)
 //　http://www.nihilogic.dk/labs/canvas2image/
 function saveData() {
-    // var canvas = document.getElementById("canvas");
-    Canvas2Image.saveAsPNG($('#canvas')); // PNG形式で保存
+    var canvas = document.getElementById("canvas");
+    Canvas2Image.saveAsPNG(canvas); // PNG形式で保存
 }
+
+ipcRenderer.on('file-save', function() {
+    saveData();
+});
 
 // TODO: リサイズ
 function resizeCanvas() {

@@ -12,6 +12,7 @@ crashReporter.start({
     autoSubmit: true
 });
 
+const ipcMain = require('electron').ipcMain;
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 let mainWindow;
@@ -31,6 +32,7 @@ function showResize() {
     // 大きさ変更
     win.resize(300, 200).restore();
 }
+
 app.on('ready', function() {
 
     // ブラウザ(Chromium)の起動, 初期画面のロード
@@ -49,11 +51,45 @@ app.on('ready', function() {
         label: 'Electron',
         submenu: [{
             label: 'Quit',
-            accelerator: 'Command+Q',
+            accelerator: "CmdOrCtrl+Q",
             click: function() {
                 app.quit();
             }
         }, ]
+    }, {
+        label: 'File',
+        submenu: [{
+            label: 'New File',
+            accelerator: "CmdOrCtrl+N",
+            click: function() {
+                console.log("後で作る");
+            }
+        }, {
+            label: "Save",
+            accelerator: "CmdOrCtrl+S",
+            click: function() {
+                // draw.jsに送る
+                var focusedWindow = BrowserWindow.getFocusedWindow();
+                focusedWindow.webContents.send('file-save');
+            }
+        }]
+    }, {
+        label: 'Edit',
+        submenu: [{
+            label: 'Resize',
+            accelerator: "CmdOrCtrl+E",
+            click: function() {
+                showResize();
+            }
+        }, {
+            label: "Copy",
+            accelerator: "CmdOrCtrl+C",
+            selector: "copy:"
+        }, {
+            label: "Paste",
+            accelerator: "CmdOrCtrl+V",
+            selector: "paste:"
+        }]
     }, {
         label: 'View',
         submenu: [
@@ -78,23 +114,6 @@ app.on('ready', function() {
                 }
             },
         ]
-    }, {
-        label: 'Edit',
-        submenu: [{
-            label: 'Resize',
-            accelerator: 'Command+E',
-            click: function() {
-                showResize();
-            }
-        }, {
-            label: "Copy",
-            accelerator: "CmdOrCtrl+C",
-            selector: "copy:"
-        }, {
-            label: "Paste",
-            accelerator: "CmdOrCtrl+V",
-            selector: "paste:"
-        }]
     }];
     // https://pracucci.com/atom-electron-enable-copy-and-paste.html
     // これをするとメニューが上書きされてくれる
