@@ -87,10 +87,10 @@ window.addEventListener("load", function() {
 
     // スポイト or バケツ
     $('canvas').click(function(e) {
-        var getspuit = $('#spuit').is(':checked');
-        var getBucket = $('#bucket').is(':checked');
+        var is_spuit = $('#spuit').is(':checked');
+        var is_bucket = $('#bucket').is(':checked');
 
-        if (getspuit == true) {
+        if (is_spuit == true) {
             // スポイト
             spuitImage = context.getImageData(startX, startY, 1, 1);
             r = spuitImage.data[0];
@@ -98,7 +98,7 @@ window.addEventListener("load", function() {
             b = spuitImage.data[2];
             spuit_color = new RGBColor('rgb(' + r + ',' + g + ',' + b + ')');
             picker.setColor(spuit_color.toHex());
-        } else if (getBucket == true) {
+        } else if (is_bucket == true) {
             // バケツ
             var point = getPointFromEvent(event);
             var cfa = new CanvasFillAlgorithm(canvas);
@@ -116,6 +116,7 @@ window.addEventListener("load", function() {
         return false; // for chrome
     });
 
+    // バケツの色取得
     function getFillColor() {
         // #DFB73Aからの変換
         var color = new RGBColor(picker.color);
@@ -134,120 +135,121 @@ window.addEventListener("load", function() {
     }
 
     $('canvas').mousemove(function(e) {
-        if (flag) {
-            var endX = e.pageX - $('canvas').offset().left - offset;
-            var endY = e.pageY - $('canvas').offset().top - offset;
-
-            var brushColor = picker.color;
-
-            // それぞれの切り替え
-            var getBrush1 = $('#brush1').is(':checked');
-            var getBrush2 = $('#brush2').is(':checked');
-            var getBrush3 = $('#brush3').is(':checked');
-            var getBrush4 = $('#brush4').is(':checked');
-            var getBrushm = $('#miter').is(':checked');
-            var getEeraser = $('#eraser').is(':checked');
-
-            if (getBrush1 == true) {
-                //ブラシ（通常）
-                context.globalAlpha = alphaSize;
-                context.beginPath();
-                context.globalCompositeOperation = 'source-over';
-                context.strokeStyle = brushColor;
-                context.lineWidth = brushSize;
-                context.lineJoin = 'round';
-                context.lineCap = 'round';
-                context.shadowBlur = 0;
-                context.setTransform(1, 0, 0, 1, 0, 0);
-                context.moveTo(startX, startY);
-                context.lineTo(endX, endY);
-                context.stroke();
-                context.closePath();
-            } else if (getBrush2 == true) {
-                //ブラシ（ぼかし１）
-                context.globalAlpha = alphaSize;
-                context.beginPath();
-                context.globalCompositeOperation = 'source-over';
-                context.strokeStyle = brushColor;
-                context.lineWidth = brushSize;
-                context.lineJoin = 'round';
-                context.lineCap = 'round';
-                context.shadowBlur = brushSize;
-                context.shadowColor = brushColor;
-                context.setTransform(1, 0, 0, 1, 0, 0);
-                context.moveTo(startX, startY);
-                context.lineTo(endX, endY);
-                context.stroke();
-                context.closePath();
-            } else if (getBrush3 == true) {
-                //ブラシ（ぼかし２）
-                brushSizex2 = brushSize + brushSize;
-                context.globalAlpha = alphaSize;
-                context.beginPath();
-                context.globalCompositeOperation = 'source-over';
-                context.strokeStyle = brushColor;
-                context.lineWidth = brushSize;
-                context.lineJoin = 'round';
-                context.lineCap = 'round';
-                context.shadowBlur = brushSizex2;
-                context.shadowColor = brushColor;
-                context.setTransform(1, 0, 0, 1, 0, 0);
-                context.moveTo(startX, startY);
-                context.lineTo(endX, endY);
-                context.stroke();
-                context.closePath();
-            } else if (getBrush4 == true) {
-                //ブラシ（パステル）
-                context.globalAlpha = 0.1;
-                context.beginPath();
-                context.globalCompositeOperation = 'source-over';
-                context.strokeStyle = '#ffffff';
-                context.lineWidth = brushSize;
-                context.lineJoin = 'miter';
-                context.lineCap = 'butt';
-                context.shadowBlur = brushSize;
-                context.shadowColor = brushColor;
-                context.setTransform(1, 0, 0, 1, 0, 0);
-                context.moveTo(startX, startY);
-                context.lineTo(endX, endY);
-                context.stroke();
-                context.closePath();
-
-            } else if (getBrushm == true) {
-                //ブラシ（四角）
-                context.globalAlpha = alphaSize;
-                context.beginPath();
-                context.globalCompositeOperation = 'source-over';
-                context.strokeStyle = brushColor;
-                context.lineWidth = brushSize;
-                context.lineJoin = 'miter';
-                context.lineCap = 'butt';
-                context.shadowBlur = 0;
-                context.setTransform(1, 0, 0, 1, 0, 0);
-                context.moveTo(startX, startY);
-                context.lineTo(endX, endY);
-                context.stroke();
-                context.closePath();
-            } else if (getEeraser == true) {
-                //消しゴム
-                context.globalAlpha = 1;
-                context.beginPath();
-                context.globalCompositeOperation = 'destination-out';
-                context.strokeStyle = '#000000';
-                context.lineWidth = brushSize;
-                context.lineJoin = 'round';
-                context.lineCap = 'round';
-                context.shadowBlur = 0;
-                context.setTransform(1, 0, 0, 1, 0, 0);
-                context.moveTo(startX, startY);
-                context.lineTo(endX, endY);
-                context.stroke();
-                context.closePath();
-            }
-
-            startX = endX;
-            startY = endY;
+        if (!flag) {
+            return;
         }
+        var endX = e.pageX - $('canvas').offset().left - offset;
+        var endY = e.pageY - $('canvas').offset().top - offset;
+
+        var brushColor = picker.color;
+
+        // それぞれの切り替え
+        var getBrush1 = $('#brush1').is(':checked');
+        var getBrush2 = $('#brush2').is(':checked');
+        var getBrush3 = $('#brush3').is(':checked');
+        var getBrush4 = $('#brush4').is(':checked');
+        var getBrushm = $('#miter').is(':checked');
+        var getEeraser = $('#eraser').is(':checked');
+
+        if (getBrush1 == true) {
+            //ブラシ（通常）
+            context.globalAlpha = alphaSize;
+            context.beginPath();
+            context.globalCompositeOperation = 'source-over';
+            context.strokeStyle = brushColor;
+            context.lineWidth = brushSize;
+            context.lineJoin = 'round';
+            context.lineCap = 'round';
+            context.shadowBlur = 0;
+            context.setTransform(1, 0, 0, 1, 0, 0);
+            context.moveTo(startX, startY);
+            context.lineTo(endX, endY);
+            context.stroke();
+            context.closePath();
+        } else if (getBrush2 == true) {
+            //ブラシ（ぼかし１）
+            context.globalAlpha = alphaSize;
+            context.beginPath();
+            context.globalCompositeOperation = 'source-over';
+            context.strokeStyle = brushColor;
+            context.lineWidth = brushSize;
+            context.lineJoin = 'round';
+            context.lineCap = 'round';
+            context.shadowBlur = brushSize;
+            context.shadowColor = brushColor;
+            context.setTransform(1, 0, 0, 1, 0, 0);
+            context.moveTo(startX, startY);
+            context.lineTo(endX, endY);
+            context.stroke();
+            context.closePath();
+        } else if (getBrush3 == true) {
+            //ブラシ（ぼかし２）
+            brushSizex2 = brushSize + brushSize;
+            context.globalAlpha = alphaSize;
+            context.beginPath();
+            context.globalCompositeOperation = 'source-over';
+            context.strokeStyle = brushColor;
+            context.lineWidth = brushSize;
+            context.lineJoin = 'round';
+            context.lineCap = 'round';
+            context.shadowBlur = brushSizex2;
+            context.shadowColor = brushColor;
+            context.setTransform(1, 0, 0, 1, 0, 0);
+            context.moveTo(startX, startY);
+            context.lineTo(endX, endY);
+            context.stroke();
+            context.closePath();
+        } else if (getBrush4 == true) {
+            //ブラシ（パステル）
+            context.globalAlpha = 0.1;
+            context.beginPath();
+            context.globalCompositeOperation = 'source-over';
+            context.strokeStyle = '#ffffff';
+            context.lineWidth = brushSize;
+            context.lineJoin = 'miter';
+            context.lineCap = 'butt';
+            context.shadowBlur = brushSize;
+            context.shadowColor = brushColor;
+            context.setTransform(1, 0, 0, 1, 0, 0);
+            context.moveTo(startX, startY);
+            context.lineTo(endX, endY);
+            context.stroke();
+            context.closePath();
+
+        } else if (getBrushm == true) {
+            //ブラシ（四角）
+            context.globalAlpha = alphaSize;
+            context.beginPath();
+            context.globalCompositeOperation = 'source-over';
+            context.strokeStyle = brushColor;
+            context.lineWidth = brushSize;
+            context.lineJoin = 'miter';
+            context.lineCap = 'butt';
+            context.shadowBlur = 0;
+            context.setTransform(1, 0, 0, 1, 0, 0);
+            context.moveTo(startX, startY);
+            context.lineTo(endX, endY);
+            context.stroke();
+            context.closePath();
+        } else if (getEeraser == true) {
+            //消しゴム
+            context.globalAlpha = 1;
+            context.beginPath();
+            context.globalCompositeOperation = 'destination-out';
+            context.strokeStyle = '#000000';
+            context.lineWidth = brushSize;
+            context.lineJoin = 'round';
+            context.lineCap = 'round';
+            context.shadowBlur = 0;
+            context.setTransform(1, 0, 0, 1, 0, 0);
+            context.moveTo(startX, startY);
+            context.lineTo(endX, endY);
+            context.stroke();
+            context.closePath();
+        }
+
+        startX = endX;
+        startY = endY;
     });
 
     // $('canvas').on('mouseup', function() {
