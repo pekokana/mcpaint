@@ -170,8 +170,7 @@ function setupKinetic(canvas) {
 
     function initStage(images) {
         var stage = new Kinetic.Stage({
-            container: 'container',
-            // container: 'canvas',
+            container: 'container', // divのcontainer
             width: 578,
             height: 400
         });
@@ -246,4 +245,7 @@ function setupKinetic(canvas) {
         yoda: 'http://www.html5canvastutorials.com/demos/assets/yoda.jpg'
     };
     loadImages(sources, initStage);
+
+    // TODO: 消す
+     $("#container").hide()
 }

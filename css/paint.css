@@ -1,23 +1,25 @@
-﻿body {
+﻿/*body {
     margin: 20px;
-}
+}*/
 canvas {
     top: 20px;
     left: 20px;
-    border: 5px solid #ccc;
+    width: 640px;
+    height: 480px;
+    border: 1px solid #ccc;
     margin: 0px 0px 10px 0px;
 }
 #button {
     position: relative;
-clear: both;
+    clear: both;
 }
 #button img { vertical-align:middle; }
-#save {
+/*#save {
 
 }
 #clear {
 
-}
+}*/
 #colorlist {
     position: absolute;
     top: 20px;

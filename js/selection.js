@@ -1,5 +1,6 @@
 'use strict';
 
+// 矩形描画ツール
 var app = (function() {
     //キャンバスエレメント
     var _displayLayer;
@@ -38,24 +39,35 @@ var app = (function() {
         }
     };
 
+    function getSelection() {
+        var res = $('#selection').is(':checked');
+        return res;
+    }
+
     function onMouseDown(e) {
-        _rectangle.startY = e.clientY;
-        _rectangle.startX = e.clientX;
-        _drawingLayer.addEventListener("mousemove", onMouseMove, false);
+        if(getSelection()) {
+            _rectangle.startY = e.clientY;
+            _rectangle.startX = e.clientX;
+            _drawingLayer.addEventListener("mousemove", onMouseMove, false);
+        }
     };
 
     function onMouseMove(e) {
-        _ctxdrawingLayer.clearRect(0, 0, _canvasX, _canvasY);
-        _rectangle.endY = e.layerY - _rectangle.startY;
-        _rectangle.endX = e.layerX - _rectangle.startX;
-        _ctxdrawingLayer.strokeRect(_rectangle.startX, _rectangle.startY, _rectangle.endX, _rectangle.endY);
+        if(getSelection()) {
+            _ctxdrawingLayer.clearRect(0, 0, _canvasX, _canvasY);
+            _rectangle.endY = e.layerY - _rectangle.startY;
+            _rectangle.endX = e.layerX - _rectangle.startX;
+            _ctxdrawingLayer.strokeRect(_rectangle.startX, _rectangle.startY, _rectangle.endX, _rectangle.endY);
+        }
     };
 
     function onMouseUp(e) {
-        _ctxDisplayLayer.fillRect(_rectangle.startX, _rectangle.startY, _rectangle.endX, _rectangle.endY);
-        _rectangle.clear();
-        _ctxdrawingLayer.clearRect(0, 0, _canvasX, _canvasY);
-        _drawingLayer.removeEventListener("mousemove", onMouseMove, false);
+        if(getSelection()) {
+            _ctxDisplayLayer.fillRect(_rectangle.startX, _rectangle.startY, _rectangle.endX, _rectangle.endY);
+            _rectangle.clear();
+            _ctxdrawingLayer.clearRect(0, 0, _canvasX, _canvasY);
+            _drawingLayer.removeEventListener("mousemove", onMouseMove, false);
+        }
     };
 
     return app;
