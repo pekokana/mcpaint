@@ -17,7 +17,8 @@
     <script type="text/javascript" src="farbtastic/farbtastic.js"></script>
     <script type="text/javascript" src="js/rgbcolor.js"></script>
     <script type="text/javascript" src="js/paint.js"></script>
-    <script type="text/javascript" src="js/selection.js"></script>
+    <!--<script type="text/javascript" src="js/selection.js"></script>-->
+    <script type="text/javascript" src="js/rectangle.js"></script>
     <script type="text/javascript" src="js/kinetic-v5.0.1.min.js"></script>
     <script type="text/javascript" src="js/kPF1v.js"></script>
 </head>
@@ -33,20 +34,23 @@
     <script type="text/javascript">
         var display = document.getElementById("display");
         var drawing = document.getElementById("drawing");
-        var instance = new app(display, drawing);
+        var instance = new rectangleTool(display, drawing);
     </script>
 
     <div id="menu">
         <div id="button">
-            <input type="radio" name="brush" id="selection" checked="checked" /><label for="selection"><img src="icon/selection.png" alt="範囲選択" title="範囲選択"></label>
+            <!--<input type="radio" name="brush" id="selection1" checked="checked" /><label for="selection1"><img src="icon/selection.png" alt="範囲選択" title="範囲選択"></label>-->
+            <input type="radio" name="brush" id="selection2" checked="checked" /><label for="selection2"><img src="icon/selection.png" alt="範囲選択" title="範囲選択"></label>
+            <input type="radio" name="brush" id="eraser" /><label for="eraser"><img src="icon/erase.png" alt="消しゴム" title="消しゴム"></label>
+            <input type="radio" name="brush" id="bucket" /><label for="bucket"><img src="icon/bucket.png" alt="バケツ" title="バケツ"></label>
+            <input type="radio" name="brush" id="spuit" /><label for="spuit"><img src="icon/spuit.png" alt="スポイト" title="スポイト"></label>
+            <input type="radio" name="brush" id="miter" /><label for="miter"><img src="icon/penm.png" alt="角ペン" title="角ペン"></label>
             <input type="radio" name="brush" id="brush1" /><label for="brush1"><img src="icon/brush1.png" alt="ブラシ" title="ブラシ"></label>
+            <!--<input type="radio" name="brush" id="zoom" /><label for="zoom"><img src="icon/zoom.png" alt="スポイト" title="スポイト"></label>-->
             <!--<input type="radio" name="brush" id="brush2" /><label for="brush2"><img src="pen2.gif" alt="ぼかし１" title="ぼかし１"></label>
             <input type="radio" name="brush" id="brush3" /><label for="brush3"><img src="pen3.gif" alt="ぼかし２" title="ぼかし２"></label>-->
             <!--<input type="radio" name="brush" id="brush4" /><label for="brush4"><img src="pen4.gif" alt="パステル" title="パステル"></label>-->
-            <input type="radio" name="brush" id="miter" /><label for="miter"><img src="icon/penm.png" alt="角ペン" title="角ペン"></label>
-            <input type="radio" name="brush" id="eraser" /><label for="eraser"><img src="icon/erase.png" alt="消しゴム" title="消しゴム"></label>
-            <input type="radio" name="brush" id="spuit" /><label for="spuit"><img src="icon/spuit.png" alt="スポイト" title="スポイト"></label>
-            <input type="radio" name="brush" id="bucket" /><label for="bucket"><img src="icon/bucket.png" alt="バケツ" title="バケツ"></label>
+            <input type="radio" name="brush" id="rectangle" /><label for="rectangle"><img src="icon/rectangle.png" alt="矩形" title="矩形"></label>
         </div>
         <div id="slider"></div>
         <br>
