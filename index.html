@@ -17,6 +17,7 @@
     <script type="text/javascript" src="farbtastic/farbtastic.js"></script>
     <script type="text/javascript" src="js/rgbcolor.js"></script>
     <script type="text/javascript" src="js/paint.js"></script>
+    <script type="text/javascript" src="js/text.js"></script>
     <!--<script type="text/javascript" src="js/selection.js"></script>-->
     <script type="text/javascript" src="js/line.js"></script>
     <script type="text/javascript" src="js/rectangle.js"></script>
@@ -78,9 +79,13 @@
             <tr>
                 <td>
                     <!--スプレー-->
+                    <!--http://stackoverflow.com/questions/14168457/how-to-implement-a-spray-paint-tool-for-html5-canvas-->
+                    <input type="radio" name="brush" id="spray" /><label for="spray"><img src="icon/spray.png" alt="スプレー" title="スプレ"></label>
                 </td>
                 <td>
                     <!--文字-->
+                    <!--http://www.html5.jp/canvas/ref/method/fillText.html-->
+                    <input type="radio" name="brush" id="text" /><label for="text"><img src="icon/text.png" alt="テキスト" title="テキスト"></label>
                 </td>
             </tr>
             <tr>
