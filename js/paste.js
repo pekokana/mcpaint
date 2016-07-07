@@ -6,6 +6,7 @@ function enablePasteForCanvas(canvas) {
         x: 0,
         y: 0
     };
+
     var pasteEvent = function(e) {
         (function() {
             var i;
@@ -18,6 +19,7 @@ function enablePasteForCanvas(canvas) {
                     break;
                 }
             }
+
             if (!imageItem) {
                 console.log("clipboard does not contain an image.");
                 return;
@@ -40,16 +42,13 @@ function enablePasteForCanvas(canvas) {
     };
 
     // Canvasにフォーカスが当たったらペーストイベントにコールバックを追加
-    //   canvas.addEventListener("focus", function(e){
-    canvas.addEventListener("mousedown", function(e) {
+    $('canvas').mousedown(function(e) {
         document.addEventListener("paste", pasteEvent, false);
         mousePos = getPointFromEvent(e);
     }, false);
     // フォーカスが外れたらイベントからコールバックを削除
-    // canvas.addEventListener("blur", function(e){
-    // canvas.addEventListener("mouseup", function(e) {
     document.addEventListener("mousedown", function(e) {
-        // ドキュメント上だと外れたことになる
+        // ドキュメント上でmousedownだと外れたことになる
         document.removeEventListener("paste", pasteEvent, false);
     }, false);
 
@@ -58,7 +57,7 @@ function enablePasteForCanvas(canvas) {
 }
 
 //==========
-// TODO: kinetic
+// TODO: kinetic ドラッグのやつ
 function setupKinetic(canvas) {
     function update(activeAnchor) {
         var group = activeAnchor.getParent();
@@ -247,5 +246,5 @@ function setupKinetic(canvas) {
     loadImages(sources, initStage);
 
     // TODO: 消す
-     $("#container").hide()
+    $("#container").hide()
 }
