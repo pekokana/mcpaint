@@ -20,6 +20,10 @@ var rectangleTool = (function() {
         _canvasY = _drawingLayer.clientHeight;
         _canvasX = _drawingLayer.clientWidth;
         _ctxDisplayLayer = _display.getContext("2d");
+        // 破線 TODO
+        var dashList = [3, 3]; // Create 3x3 dots and spaces
+        _ctxDisplayLayer.setLineDash(dashList);
+
         _ctxdrawingLayer = _drawing.getContext("2d");
         _drawingLayer.addEventListener("mousedown", onMouseDown, false);
         _drawingLayer.addEventListener("mouseup", onMouseUp, false);
@@ -48,7 +52,10 @@ var rectangleTool = (function() {
     function onMouseDown(e) {
         if (getRectangle()) {
             _rectangle.startY = e.clientY;
-            _rectangle.startX = e.clientX;
+            var offsetX = parseInt($('canvas').css("left").replace("px", ""), 10);
+            // _rectangle.startX = e.clientX;
+            console.log(offsetX);
+            _rectangle.startX = e.clientX - offsetX;
             _drawingLayer.addEventListener("mousemove", onMouseMove, false);
         }
     };
