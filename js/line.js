@@ -10,8 +10,7 @@ window.addEventListener("load", function() {
 
         if (is_line == true) {
 
-        }
-        if (is_wave_line == true) {
+        } else if (is_wave_line == true) {
 
         }
     });

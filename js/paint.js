@@ -30,3 +30,14 @@ $(function() {
         window.open(d, 'save');
     });
 });
+
+// 保存処理　(Canvas2Image)
+//　http://www.nihilogic.dk/labs/canvas2image/
+function saveData() {
+    var canvas = document.getElementById("canvas");
+    Canvas2Image.saveAsPNG(canvas); // PNG形式で保存
+}
+
+ipcRenderer.on('file-save', function() {
+    saveData();
+});
