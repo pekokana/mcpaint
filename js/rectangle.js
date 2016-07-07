@@ -5,9 +5,10 @@ var rectangleTool = (function() {
     //キャンバスエレメント
     var _displayLayer;
     var _drawingLayer;
-    //描画コンテキスト
+    // 描画コンテキスト
     var _ctxDisplayLayer;
-    var _ctxdrawingLayer;
+    // 破線用
+    var _ctxDrawingLayer;
 
     // キャンバスサイズ
     var _canvasY;
@@ -20,11 +21,10 @@ var rectangleTool = (function() {
         _canvasY = _drawingLayer.clientHeight;
         _canvasX = _drawingLayer.clientWidth;
         _ctxDisplayLayer = _display.getContext("2d");
-        // 破線 TODO
-        var dashList = [3, 3]; // Create 3x3 dots and spaces
-        _ctxDisplayLayer.setLineDash(dashList);
-
-        _ctxdrawingLayer = _drawing.getContext("2d");
+        _ctxDrawingLayer = _drawing.getContext("2d");
+        // 破線
+        var dashList = [1, 1]; // Create 3x3 dots and spaces
+        _ctxDrawingLayer.setLineDash(dashList);
         _drawingLayer.addEventListener("mousedown", onMouseDown, false);
         _drawingLayer.addEventListener("mouseup", onMouseUp, false);
     };
@@ -62,10 +62,10 @@ var rectangleTool = (function() {
 
     function onMouseMove(e) {
         if (getRectangle()) {
-            _ctxdrawingLayer.clearRect(0, 0, _canvasX, _canvasY);
+            _ctxDrawingLayer.clearRect(0, 0, _canvasX, _canvasY);
             _rectangle.endY = e.layerY - _rectangle.startY;
             _rectangle.endX = e.layerX - _rectangle.startX;
-            _ctxdrawingLayer.strokeRect(_rectangle.startX, _rectangle.startY, _rectangle.endX, _rectangle.endY);
+            _ctxDrawingLayer.strokeRect(_rectangle.startX, _rectangle.startY, _rectangle.endX, _rectangle.endY);
         }
     };
 
@@ -73,7 +73,7 @@ var rectangleTool = (function() {
         if (getRectangle()) {
             _ctxDisplayLayer.fillRect(_rectangle.startX, _rectangle.startY, _rectangle.endX, _rectangle.endY);
             _rectangle.clear();
-            _ctxdrawingLayer.clearRect(0, 0, _canvasX, _canvasY);
+            _ctxDrawingLayer.clearRect(0, 0, _canvasX, _canvasY);
             _drawingLayer.removeEventListener("mousemove", onMouseMove, false);
         }
     };
