@@ -6,11 +6,11 @@ window.addEventListener("load", function() {
     var start_y;
     var offset = 5;
     var flag = false;
-    var getImage;
-    var undoImage;
-    var brushSize = 1;
-    var alphaSize = 1;
-    var brushColor = '#000000';
+    var get_image;
+    var undo_image;
+    var brush_size = 1;
+    var alpha_size = 1;
+    var brush_color = '#000000';
 
     // キャンバス
     var canvas = document.getElementById("canvas");
@@ -18,7 +18,7 @@ window.addEventListener("load", function() {
         var context = canvas.getContext('2d');
     }
     $('canvas').mousedown(function(e) {
-        undoImage = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
+        undo_image = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
         flag = true;
         start_x = e.pageX - $(this).offset().left - offset;
         start_y = e.pageY - $(this).offset().top - offset;
@@ -57,31 +57,35 @@ window.addEventListener("load", function() {
     });
 
     window.addEventListener("mouseup", function(e) { // キャンバスでなくウィンドウに
+        if (!flag) {
+            return;
+        }
+
         var is_line = $('#line').is(':checked');
         var is_wave_line = $('#wave-line').is(':checked');
 
-        var endX = e.pageX - $('canvas').offset().left - offset;
-        var endY = e.pageY - $('canvas').offset().top - offset;
+        var end_x = e.pageX - $('canvas').offset().left - offset;
+        var end_y = e.pageY - $('canvas').offset().top - offset;
 
         if (is_line == true) {
-            context.globalAlpha = alphaSize;
+            context.globalAlpha = alpha_size;
             context.beginPath();
             context.globalCompositeOperation = 'source-over';
-            context.strokeStyle = brushColor;
-            context.lineWidth = brushSize;
+            context.strokeStyle = brush_color;
+            context.lineWidth = brush_size;
             context.lineJoin = 'miter';
             context.lineCap = 'butt';
             context.shadowBlur = 0;
             context.setTransform(1, 0, 0, 1, 0, 0);
             context.moveTo(start_x, start_y);
-            context.lineTo(endX, endY);
+            context.lineTo(end_x, end_y);
             context.stroke();
             context.closePath();
         } else if (is_wave_line == true) {
 
         }
 
-        getImage = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
+        get_image = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
         flag = false;
     });
 })

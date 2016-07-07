@@ -1,16 +1,49 @@
-# mcpaint
+MC Paint
+====
 
-## インストール
+Overview
 
-```
-npm instsall
-```
+## Description
 
-## 実行
+MicrosoftのMSペイント（mspaint.exe）をMac OS Xでも使いたい。
+
+## Demo
+
+N/A
+
+## VS. 
+
+MicrosoftのMSペイント（mspaint.exe）
+
+## Requirement
+
+JS(ES2015)
+git
+
+## Usage
 
 ```
 npm start
 ```
+
+## Install
+
+```
+got clone https://github.com/shinriyo/mcpaint && cd mcpaint
+npm instsall
+```
+
+## Contribution
+
+N/A
+
+## Licence
+
+[MIT](https://github.com/tcnksm/tool/blob/master/LICENCE)
+
+## Author
+
+[shinriyo](https://github.com/shinriyo)
 
 ## 参考
 

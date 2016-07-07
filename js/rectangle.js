@@ -54,24 +54,33 @@ var rectangleTool = (function() {
             _rectangle.startY = e.clientY;
             var offsetX = parseInt($('canvas').css("left").replace("px", ""), 10);
             // _rectangle.startX = e.clientX;
-            console.log(offsetX);
+            // console.log(offsetX);
             _rectangle.startX = e.clientX - offsetX;
             _drawingLayer.addEventListener("mousemove", onMouseMove, false);
         }
     };
 
+    // 点線
     function onMouseMove(e) {
         if (getRectangle()) {
             _ctxDrawingLayer.clearRect(0, 0, _canvasX, _canvasY);
             _rectangle.endY = e.layerY - _rectangle.startY;
             _rectangle.endX = e.layerX - _rectangle.startX;
+
+            var brushColor = picker.color;
+            _ctxDrawingLayer.strokeStyle = brushColor;
             _ctxDrawingLayer.strokeRect(_rectangle.startX, _rectangle.startY, _rectangle.endX, _rectangle.endY);
         }
     };
 
+    // 塗りつぶし
     function onMouseUp(e) {
         if (getRectangle()) {
+            // 塗りつぶしの色を決める
+            var brushColor = picker.color;
+            _ctxDisplayLayer.fillStyle = brushColor;
             _ctxDisplayLayer.fillRect(_rectangle.startX, _rectangle.startY, _rectangle.endX, _rectangle.endY);
+
             _rectangle.clear();
             _ctxDrawingLayer.clearRect(0, 0, _canvasX, _canvasY);
             _drawingLayer.removeEventListener("mousemove", onMouseMove, false);

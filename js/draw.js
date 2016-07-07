@@ -1,5 +1,6 @@
 'use strict';
 
+var picker;
 // main.jsから受信用
 const ipcRenderer = require('electron').ipcRenderer;
 window.addEventListener("load", function() {
@@ -7,21 +8,22 @@ window.addEventListener("load", function() {
     var canvas = document.getElementById("canvas");
 
     var offset = 5;
-    var startX;
-    var startY;
-    var brushSize = 1;
-    var alphaSize = 1;
-    var brushColor = '#000000';
+    var start_x;
+    var start_y;
+    var brush_size = 1;
+    var alpha_size = 1;
+    var brush_color = '#000000';
     var flag = false;
     var canvas = $('canvas').get(0);
-    var getImage;
-    var undoImage;
+    var get_image;
+    var undo_image;
 
     if (canvas.getContext) {
         var context = canvas.getContext('2d');
     }
 
-    var picker = $.farbtastic('#colorpicker');
+    // var picker = $.farbtastic('#colorpicker');
+    picker = $.farbtastic('#colorpicker');
     picker.linkTo($("#color"));
 
     // 背景色系
@@ -46,8 +48,8 @@ window.addEventListener("load", function() {
         max: 100, // ブラシの最大サイズ
         value: 1, // 最初のブラシサイズ
         slide: function(evt, ui) {
-            brushSize = ui.value; // ブラシサイズを設定
-            $("#bw").val(brushSize);
+            brush_size = ui.value; // ブラシサイズを設定
+            $("#bw").val(brush_size);
         }
     });
     // 消す
@@ -61,11 +63,11 @@ window.addEventListener("load", function() {
             alpha = ui.value;
             $('#alpha').val(alpha);
             if (alpha == 100) {
-                alphaSize = 1;
+                alpha_size = 1;
             } else if (alpha <= 9) {
-                alphaSize = '0.0' + alpha;
+                alpha_size = '0.0' + alpha;
             } else if (alpha >= 10) {
-                alphaSize = '0.' + alpha;
+                alpha_size = '0.' + alpha;
             }
         }
     });
@@ -92,11 +94,11 @@ window.addEventListener("load", function() {
 
         if (is_spuit == true) {
             // スポイト
-            spuitImage = context.getImageData(startX, startY, 1, 1);
+            spuitImage = context.getImageData(start_x, start_y, 1, 1);
             r = spuitImage.data[0];
             g = spuitImage.data[1];
             b = spuitImage.data[2];
-            spuit_color = new RGBColor('rgb(' + r + ',' + g + ',' + b + ')');
+           var  spuit_color = new RGBColor('rgb(' + r + ',' + g + ',' + b + ')');
             picker.setColor(spuit_color.toHex());
         } else if (is_bucket == true) {
             // バケツ
@@ -109,10 +111,10 @@ window.addEventListener("load", function() {
     });
 
     $('canvas').mousedown(function(e) {
-        undoImage = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
+        undo_image = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
         flag = true;
-        startX = e.pageX - $(this).offset().left - offset;
-        startY = e.pageY - $(this).offset().top - offset;
+        start_x = e.pageX - $(this).offset().left - offset;
+        start_y = e.pageY - $(this).offset().top - offset;
         return false; // for chrome
     });
 
@@ -141,7 +143,7 @@ window.addEventListener("load", function() {
         var endX = e.pageX - $('canvas').offset().left - offset;
         var endY = e.pageY - $('canvas').offset().top - offset;
 
-        var brushColor = picker.color;
+        var brush_color = picker.color;
 
         // それぞれの切り替え
         var getBrush1 = $('#brush1').is(':checked');
@@ -153,49 +155,49 @@ window.addEventListener("load", function() {
 
         if (getBrush1 == true) {
             //ブラシ（通常）
-            context.globalAlpha = alphaSize;
+            context.globalAlpha = alpha_size;
             context.beginPath();
             context.globalCompositeOperation = 'source-over';
-            context.strokeStyle = brushColor;
-            context.lineWidth = brushSize;
+            context.strokeStyle = brush_color;
+            context.lineWidth = brush_size;
             context.lineJoin = 'round';
             context.lineCap = 'round';
             context.shadowBlur = 0;
             context.setTransform(1, 0, 0, 1, 0, 0);
-            context.moveTo(startX, startY);
+            context.moveTo(start_x, start_y);
             context.lineTo(endX, endY);
             context.stroke();
             context.closePath();
         } else if (getBrush2 == true) {
             //ブラシ（ぼかし１）
-            context.globalAlpha = alphaSize;
+            context.globalAlpha = alpha_size;
             context.beginPath();
             context.globalCompositeOperation = 'source-over';
-            context.strokeStyle = brushColor;
-            context.lineWidth = brushSize;
+            context.strokeStyle = brush_color;
+            context.lineWidth = brush_size;
             context.lineJoin = 'round';
             context.lineCap = 'round';
-            context.shadowBlur = brushSize;
-            context.shadowColor = brushColor;
+            context.shadowBlur = brush_size;
+            context.shadowColor = brush_color;
             context.setTransform(1, 0, 0, 1, 0, 0);
-            context.moveTo(startX, startY);
+            context.moveTo(start_x, start_y);
             context.lineTo(endX, endY);
             context.stroke();
             context.closePath();
         } else if (getBrush3 == true) {
             //ブラシ（ぼかし２）
-            brushSizex2 = brushSize + brushSize;
-            context.globalAlpha = alphaSize;
+            brushSizex2 = brush_size + brush_size;
+            context.globalAlpha = alpha_size;
             context.beginPath();
             context.globalCompositeOperation = 'source-over';
-            context.strokeStyle = brushColor;
-            context.lineWidth = brushSize;
+            context.strokeStyle = brush_color;
+            context.lineWidth = brush_size;
             context.lineJoin = 'round';
             context.lineCap = 'round';
             context.shadowBlur = brushSizex2;
-            context.shadowColor = brushColor;
+            context.shadowColor = brush_color;
             context.setTransform(1, 0, 0, 1, 0, 0);
-            context.moveTo(startX, startY);
+            context.moveTo(start_x, start_y);
             context.lineTo(endX, endY);
             context.stroke();
             context.closePath();
@@ -205,29 +207,29 @@ window.addEventListener("load", function() {
             context.beginPath();
             context.globalCompositeOperation = 'source-over';
             context.strokeStyle = '#ffffff';
-            context.lineWidth = brushSize;
+            context.lineWidth = brush_size;
             context.lineJoin = 'miter';
             context.lineCap = 'butt';
-            context.shadowBlur = brushSize;
-            context.shadowColor = brushColor;
+            context.shadowBlur = brush_size;
+            context.shadowColor = brush_color;
             context.setTransform(1, 0, 0, 1, 0, 0);
-            context.moveTo(startX, startY);
+            context.moveTo(start_x, start_y);
             context.lineTo(endX, endY);
             context.stroke();
             context.closePath();
 
         } else if (getBrushm == true) {
             //ブラシ（四角）
-            context.globalAlpha = alphaSize;
+            context.globalAlpha = alpha_size;
             context.beginPath();
             context.globalCompositeOperation = 'source-over';
-            context.strokeStyle = brushColor;
-            context.lineWidth = brushSize;
+            context.strokeStyle = brush_color;
+            context.lineWidth = brush_size;
             context.lineJoin = 'miter';
             context.lineCap = 'butt';
             context.shadowBlur = 0;
             context.setTransform(1, 0, 0, 1, 0, 0);
-            context.moveTo(startX, startY);
+            context.moveTo(start_x, start_y);
             context.lineTo(endX, endY);
             context.stroke();
             context.closePath();
@@ -237,24 +239,24 @@ window.addEventListener("load", function() {
             context.beginPath();
             context.globalCompositeOperation = 'destination-out';
             context.strokeStyle = '#000000';
-            context.lineWidth = brushSize;
+            context.lineWidth = brush_size;
             context.lineJoin = 'round';
             context.lineCap = 'round';
             context.shadowBlur = 0;
             context.setTransform(1, 0, 0, 1, 0, 0);
-            context.moveTo(startX, startY);
+            context.moveTo(start_x, start_y);
             context.lineTo(endX, endY);
             context.stroke();
             context.closePath();
         }
 
-        startX = endX;
-        startY = endY;
+        start_x = endX;
+        start_y = endY;
     });
 
     // $('canvas').on('mouseup', function() {
     window.addEventListener("mouseup", function() { // キャンバスでなくウィンドウに
-        getImage = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
+        get_image = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
         flag = false;
     });
 
