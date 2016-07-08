@@ -100,7 +100,7 @@ window.addEventListener("load", function() {
             var b = spuit_image.data[2];
             var spuit_color = new RGBColor('rgb(' + r + ',' + g + ',' + b + ')');
             picker.setColor(spuit_color.toHex());
-            alert(11);
+            // TODO: この後に自動的にペンツール？
         } else if (is_bucket == true) {
             // バケツ
             var point = getPointFromEvent(event);
@@ -144,7 +144,7 @@ window.addEventListener("load", function() {
         var endX = e.pageX - $('canvas').offset().left - offset;
         var endY = e.pageY - $('canvas').offset().top - offset;
 
-        var brush_color = picker.color;
+        brush_color = picker.color;
 
         // それぞれの切り替え
         var getBrush1 = $('#brush1').is(':checked');

@@ -1,11 +1,13 @@
 'use strict';
 
+// http: //stackoverflow.com/questions/14168457/how-to-implement-a-spray-paint-tool-for-html5-canvas
+
 /**
- * 選択ツール
+ * スプレーツール
  * 
  * @returns
  */
-var selectionTool = (function() {
+var sprayTool = (function() {
     //キャンバスエレメント
     var _displayLayer;
     var _drawingLayer;
@@ -56,22 +58,12 @@ var selectionTool = (function() {
     };
 
     /**
-     * 星形選択時のみに行うため
+     * スプレー選択時のみに行うため
      * 
      * @returns
      */
-    function getSelection1() {
-        var res = $('#selection1').is(':checked');
-        return res;
-    }
-
-    /**
-     * 選択時のみに行うため
-     * 
-     * @returns
-     */
-    function getSelection2() {
-        var res = $('#selection2').is(':checked');
+    function getSpray() {
+        var res = $('#spray').is(':checked');
         return res;
     }
 
@@ -81,9 +73,7 @@ var selectionTool = (function() {
      * @param {any} e
      */
     function onMouseDown(e) {
-        if (getSelection1()) {
-            consl.log("まだ");
-        } else if (getSelection2()) {
+        if (getSpray()) {
             _rectangle.startY = e.clientY;
             var offsetX = parseInt($('canvas').css("left").replace("px", ""), 10);
             // _rectangle.startX = e.clientX;
@@ -99,7 +89,7 @@ var selectionTool = (function() {
      * @param {any} e
      */
     function onMouseMove(e) {
-        if (getSelection1()) {} else if (getSelection2()) {
+        if (getSpray()) {
             _ctxDrawingLayer.clearRect(0, 0, _canvasX, _canvasY);
             _rectangle.endY = e.layerY - _rectangle.startY;
             _rectangle.endX = e.layerX - _rectangle.startX;
@@ -116,7 +106,7 @@ var selectionTool = (function() {
      * @param {any} e
      */
     function onMouseUp(e) {
-        if (getSelection2()) {
+        if (getSpray()) {
             // 塗りつぶしの色を決める
             // var brush_color = picker.color;
             // _ctxDisplayLayer.fillStyle = brush_color;
