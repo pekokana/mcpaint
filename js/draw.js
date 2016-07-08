@@ -79,11 +79,12 @@ window.addEventListener("load", function() {
         'background-position': '0px -2px'
     });
 
-    $('li').addClass('ofclic');
-    $('li').click(function() {
+    // パレット選択
+    $('.palette').addClass('ofclic');
+    $('.palette').click(function() {
         var clic_color = new RGBColor($(this).css('background-color'));
         picker.setColor(clic_color.toHex());
-        $('li').removeClass('clic');
+        $('.palette').removeClass('clic');
         $(this).addClass('clic');
     });
 
@@ -119,7 +120,11 @@ window.addEventListener("load", function() {
         return false; // for chrome
     });
 
-    // バケツの色取得
+    /**
+     * バケツの色取得
+     * 
+     * @returns
+     */
     function getFillColor() {
         // #DFB73Aからの変換
         var color = new RGBColor(picker.color);
@@ -265,7 +270,9 @@ window.addEventListener("load", function() {
     enablePasteForCanvas(canvas);
 }, true);
 
-// TODO: リサイズ
+/**
+ * TODO: リサイズ
+ */
 function resizeCanvas() {
 
     // 虫眼鏡
