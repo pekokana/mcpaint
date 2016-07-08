@@ -110,15 +110,16 @@ label {
 /*TODO:凹むボタンの仕組み*/
 
 .donate-now {
+    width: 84px;
     list-style-type: none;
-    margin: 25px 0 0 0;
+    /*margin: 5px 0 0 0;*/
     padding: 0;
 }
 
 .donate-now li {
     float: left;
-    margin: 0 5px 0 0;
-    width: 100px;
+    /*margin: 0 5px 0 0;*/
+    width: 40px;
     height: 40px;
     position: relative;
 }
