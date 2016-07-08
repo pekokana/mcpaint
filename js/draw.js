@@ -94,12 +94,13 @@ window.addEventListener("load", function() {
 
         if (is_spuit == true) {
             // スポイト
-            spuitImage = context.getImageData(start_x, start_y, 1, 1);
-            r = spuitImage.data[0];
-            g = spuitImage.data[1];
-            b = spuitImage.data[2];
+            var spuit_image = context.getImageData(start_x, start_y, 1, 1);
+            var r = spuit_image.data[0];
+            var g = spuit_image.data[1];
+            var b = spuit_image.data[2];
             var spuit_color = new RGBColor('rgb(' + r + ',' + g + ',' + b + ')');
             picker.setColor(spuit_color.toHex());
+            alert(11);
         } else if (is_bucket == true) {
             // バケツ
             var point = getPointFromEvent(event);
