@@ -30,11 +30,15 @@
         HTML5　Canvasに対応したブラウザーを使用してください。
     </canvas>
     <!-- 矩形選択 -->
-    <canvas id="display" width="640" height="480"></canvas>
+    <!--<canvas id="display" width="640" height="480"></canvas>-->
     <canvas id="drawing" width="640" height="480"></canvas>
     <div id="container"></div>
     <script type="text/javascript">
-        var display = document.getElementById("display");
+        // var display = document.getElementById("display");
+        // 実際
+        var display = document.getElementById("canvas");
+
+        // 見せかけ
         var drawing = document.getElementById("drawing");
         var rectangle_instance = new rectangleTool(display, drawing);
 

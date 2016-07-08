@@ -1,6 +1,10 @@
 'use strict';
 
-// 矩形描画ツール
+/**
+ * 矩形描画ツール
+ * 
+ * @returns
+ */
 var rectangleTool = (function() {
     //キャンバスエレメント
     var _displayLayer;
@@ -14,7 +18,6 @@ var rectangleTool = (function() {
     var _canvasY;
     var _canvasX;
 
-    // コンストラクタ
     var app = function(_display, _drawing) {
         _displayLayer = _display;
         _drawingLayer = _drawing;
@@ -43,12 +46,21 @@ var rectangleTool = (function() {
         }
     };
 
-    // 矩形時のみに行うため
+    /**
+     * 矩形時のみに行うため
+     * 
+     * @returns
+     */
     function getRectangle() {
         var res = $('#rectangle').is(':checked');
         return res;
     }
 
+    /**
+     * 矩形開始
+     * 
+     * @param {any} e
+     */
     function onMouseDown(e) {
         if (getRectangle()) {
             _rectangle.startY = e.clientY;
@@ -60,25 +72,33 @@ var rectangleTool = (function() {
         }
     };
 
-    // 点線
+    /**
+     * 
+     * 
+     * @param {any} e
+     */
     function onMouseMove(e) {
         if (getRectangle()) {
             _ctxDrawingLayer.clearRect(0, 0, _canvasX, _canvasY);
             _rectangle.endY = e.layerY - _rectangle.startY;
             _rectangle.endX = e.layerX - _rectangle.startX;
 
-            var brushColor = picker.color;
-            _ctxDrawingLayer.strokeStyle = brushColor;
+            var brush_color = picker.color;
+            _ctxDrawingLayer.strokeStyle = brush_color;
             _ctxDrawingLayer.strokeRect(_rectangle.startX, _rectangle.startY, _rectangle.endX, _rectangle.endY);
         }
     };
 
-    // 塗りつぶし
+    /**
+     * 塗りつぶし
+     * 
+     * @param {any} e
+     */
     function onMouseUp(e) {
         if (getRectangle()) {
             // 塗りつぶしの色を決める
-            var brushColor = picker.color;
-            _ctxDisplayLayer.fillStyle = brushColor;
+            var brush_color = picker.color;
+            _ctxDisplayLayer.fillStyle = brush_color;
             _ctxDisplayLayer.fillRect(_rectangle.startX, _rectangle.startY, _rectangle.endX, _rectangle.endY);
 
             _rectangle.clear();

@@ -8,9 +8,9 @@ window.addEventListener("load", function() {
     var flag = false;
     var getImage;
     var undoImage;
-    var brushSize = 1;
+    var brush_size = 1;
     var alphaSize = 1;
-    var brushColor = '#000000';
+    var brush_color = '#000000';
 
     // キャンバス
     var canvas = document.getElementById("canvas");
@@ -40,8 +40,8 @@ window.addEventListener("load", function() {
             // context.globalAlpha = alphaSize;
             // context.beginPath();
             // context.globalCompositeOperation = 'source-over';
-            // context.strokeStyle = brushColor;
-            // context.lineWidth = brushSize;
+            // context.strokeStyle = brush_color;
+            // context.lineWidth = brush_size;
             // context.lineJoin = 'miter';
             // context.lineCap = 'butt';
             // context.shadowBlur = 0;
@@ -63,8 +63,8 @@ window.addEventListener("load", function() {
             context.globalAlpha = alphaSize;
             context.beginPath();
             context.globalCompositeOperation = 'source-over';
-            context.strokeStyle = brushColor;
-            context.lineWidth = brushSize;
+            context.strokeStyle = brush_color;
+            context.lineWidth = brush_size;
             context.lineJoin = 'miter';
             context.lineCap = 'butt';
             context.shadowBlur = 0;

@@ -98,7 +98,7 @@ window.addEventListener("load", function() {
             r = spuitImage.data[0];
             g = spuitImage.data[1];
             b = spuitImage.data[2];
-           var  spuit_color = new RGBColor('rgb(' + r + ',' + g + ',' + b + ')');
+            var spuit_color = new RGBColor('rgb(' + r + ',' + g + ',' + b + ')');
             picker.setColor(spuit_color.toHex());
         } else if (is_bucket == true) {
             // バケツ
@@ -186,7 +186,7 @@ window.addEventListener("load", function() {
             context.closePath();
         } else if (getBrush3 == true) {
             //ブラシ（ぼかし２）
-            brushSizex2 = brush_size + brush_size;
+            brush_sizex2 = brush_size + brush_size;
             context.globalAlpha = alpha_size;
             context.beginPath();
             context.globalCompositeOperation = 'source-over';
@@ -194,7 +194,7 @@ window.addEventListener("load", function() {
             context.lineWidth = brush_size;
             context.lineJoin = 'round';
             context.lineCap = 'round';
-            context.shadowBlur = brushSizex2;
+            context.shadowBlur = brush_sizex2;
             context.shadowColor = brush_color;
             context.setTransform(1, 0, 0, 1, 0, 0);
             context.moveTo(start_x, start_y);
