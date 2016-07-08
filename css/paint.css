@@ -13,12 +13,12 @@ canvas {
     margin: 0px 0px 10px 0px;
 }
 
-#button {
+#tools {
     position: relative;
     clear: both;
 }
 
-#button img {
+#tools img {
     vertical-align: middle;
 }
 
