@@ -18,8 +18,8 @@
     <script type="text/javascript" src="js/rgbcolor.js"></script>
     <script type="text/javascript" src="js/paint.js"></script>
     <script type="text/javascript" src="js/text.js"></script>
-    <!--<script type="text/javascript" src="js/selection.js"></script>-->
     <script type="text/javascript" src="js/line.js"></script>
+    <script type="text/javascript" src="js/selection.js"></script>
     <script type="text/javascript" src="js/rectangle.js"></script>
     <script type="text/javascript" src="js/kinetic-v5.0.1.min.js"></script>
     <script type="text/javascript" src="js/kPF1v.js"></script>
@@ -36,7 +36,9 @@
     <script type="text/javascript">
         var display = document.getElementById("display");
         var drawing = document.getElementById("drawing");
-        var instance = new rectangleTool(display, drawing);
+        var rectangle_instance = new rectangleTool(display, drawing);
+
+        var selection_instance = new selectionTool(display, drawing);
     </script>
 
     <div id="button">
