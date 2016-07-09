@@ -101,6 +101,7 @@ window.addEventListener("load", function() {
             var b = spuit_image.data[2];
             var spuit_color = new RGBColor('rgb(' + r + ',' + g + ',' + b + ')');
             picker.setColor(spuit_color.toHex());
+
             // TODO: この後に自動的にペンツール？
         } else if (is_bucket == true) {
             // バケツ

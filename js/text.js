@@ -17,6 +17,7 @@ window.addEventListener("load", function() {
     if (canvas.getContext) {
         var context = canvas.getContext('2d');
     }
+
     $('canvas').mousedown(function(e) {
         undoImage = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
         flag = true;

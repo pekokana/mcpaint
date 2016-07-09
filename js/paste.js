@@ -1,6 +1,10 @@
 'use strict';
 
-//指定したCanvasがペーストを受け付けるようにする。
+/**
+ *  指定したCanvasがペーストを受け付けるようにする。
+ * 
+ * @param {any} canvas
+ */
 function enablePasteForCanvas(canvas) {
     var mousePos = {
         x: 0,
@@ -58,6 +62,11 @@ function enablePasteForCanvas(canvas) {
 
 //==========
 // TODO: kinetic ドラッグのやつ
+/**
+ * 
+ * 
+ * @param {any} canvas
+ */
 function setupKinetic(canvas) {
     function update(activeAnchor) {
         var group = activeAnchor.getParent();
@@ -103,6 +112,14 @@ function setupKinetic(canvas) {
         }
     }
 
+    /**
+     * 
+     * 
+     * @param {any} group
+     * @param {any} x
+     * @param {any} y
+     * @param {any} name
+     */
     function addAnchor(group, x, y, name) {
         var stage = group.getStage();
         var layer = group.getLayer();
@@ -148,6 +165,12 @@ function setupKinetic(canvas) {
         group.add(anchor);
     }
 
+    /**
+     * 
+     * 
+     * @param {any} sources
+     * @param {any} callback
+     */
     function loadImages(sources, callback) {
         var images = {};
         var loadedImages = 0;
@@ -167,6 +190,16 @@ function setupKinetic(canvas) {
         }
     }
 
+    /**
+     * 
+     * 
+     * @param {any} images
+     */
+    /**
+     * 
+     * 
+     * @param {any} images
+     */
     function initStage(images) {
         var stage = new Kinetic.Stage({
             container: 'container', // divのcontainer

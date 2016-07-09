@@ -1,6 +1,11 @@
 'use strict';
 
-// マウス位置
+/**
+ * マウス位置
+ * 
+ * @param {any} event
+ * @returns
+ */
 function getPointFromEvent(event) {
     var boundingRect = event.target.getBoundingClientRect();
 
