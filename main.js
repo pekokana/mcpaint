@@ -34,6 +34,21 @@ function showResize() {
 }
 
 app.on('ready', function() {
+    var user_lang;// = navigator.language || navigator.userLanguage; 
+    var osLocale = require('os-locale');
+    osLocale(function (err, locale) {
+        console.log(locale);
+        //=> 'en_US'
+        user_lang = locale;
+    });
+
+    // user_lang のあとに.jsをつけたファイル名が呼ばれる
+    try{
+        var localize = require('./localize/' + user_lang + '.js');
+    } catch(e) {
+        // ユーザのが存在してなかったら仕方なくデフォルト
+        localize = require('./localize/en-US.js');
+    }
 
     // ブラウザ(Chromium)の起動, 初期画面のロード
     mainWindow = new BrowserWindow({
@@ -59,7 +74,8 @@ app.on('ready', function() {
     }, {
         label: 'File',
         submenu: [{
-            label: 'New File',
+            // label: 'New File',
+            label: localize.new_file,
             accelerator: "CmdOrCtrl+N",
             click: function() {
                 console.log("後で作る");
@@ -69,8 +85,8 @@ app.on('ready', function() {
             accelerator: "CmdOrCtrl+S",
             click: function() {
                 // draw.jsに送る
-                var focusedWindow = BrowserWindow.getFocusedWindow();
-                focusedWindow.webContents.send('file-save');
+                var focused_window = BrowserWindow.getFocusedWindow();
+                focused_window.webContents.send('file-save');
             }
         }]
     }, {
@@ -82,7 +98,8 @@ app.on('ready', function() {
                 showResize();
             }
         }, {
-            label: "Copy",
+            // label: "Copy",
+            label: localize.copy,
             accelerator: "CmdOrCtrl+C",
             selector: "copy:"
         }, {
@@ -94,7 +111,8 @@ app.on('ready', function() {
         label: 'View',
         submenu: [
             {
-                label: 'Reload',
+                // label: 'Reload',
+                label: localize.reload,
                 accelerator: 'CmdOrCtrl+R',
                 click(item, focusedWindow) {
                 if (focusedWindow) focusedWindow.reload();

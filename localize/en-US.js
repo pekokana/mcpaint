@@ -1,5 +1,7 @@
 'use strict';
 
 module.exports = {
-    a: "hello"
+    copy: "Copy",
+    reload: "Reload",
+    new_file: "New File",
 };
