@@ -15,14 +15,14 @@ var rectangleTool = (function() {
     var _ctx_drawing_layer;
 
     // キャンバスサイズ
-    var _canvasY;
-    var _canvasX;
+    var _canvas_y;
+    var _canvas_x;
 
     var app = function(_display, _drawing) {
         _display_layer = _display;
         _drawing_layer = _drawing;
-        _canvasY = _drawing_layer.clientHeight;
-        _canvasX = _drawing_layer.clientWidth;
+        _canvas_y = _drawing_layer.clientHeight;
+        _canvas_x = _drawing_layer.clientWidth;
         _ctx_display_layer = _display.getContext("2d");
         _ctx_drawing_layer = _drawing.getContext("2d");
         // 破線
@@ -34,15 +34,15 @@ var rectangleTool = (function() {
 
     // 矩形オブジェクト
     var _rectangle = {
-        startY: 0,
-        startX: 0,
-        endY: 0,
-        endX: 0,
+        start_y: 0,
+        start_x: 0,
+        end_y: 0,
+        end_x: 0,
         clear: function() {
-            this.startY = 0;
-            this.startX = 0;
-            this.endY = 0;
-            this.endX = 0;
+            this.start_y = 0;
+            this.start_x = 0;
+            this.end_y = 0;
+            this.end_x = 0;
         }
     };
 
@@ -63,11 +63,11 @@ var rectangleTool = (function() {
      */
     function onMouseDown(e) {
         if (getRectangle()) {
-            _rectangle.startY = e.clientY;
+            _rectangle.start_y = e.clientY;
             var offsetX = parseInt($('canvas').css("left").replace("px", ""), 10);
             // _rectangle.startX = e.clientX;
             // console.log(offsetX);
-            _rectangle.startX = e.clientX - offsetX;
+            _rectangle.start_x = e.clientX - offsetX;
             _drawing_layer.addEventListener("mousemove", onMouseMove, false);
         }
     };
@@ -79,13 +79,13 @@ var rectangleTool = (function() {
      */
     function onMouseMove(e) {
         if (getRectangle()) {
-            _ctx_drawing_layer.clearRect(0, 0, _canvasX, _canvasY);
-            _rectangle.endY = e.layerY - _rectangle.startY;
-            _rectangle.endX = e.layerX - _rectangle.startX;
+            _ctx_drawing_layer.clearRect(0, 0, _canvas_x, _canvas_y);
+            _rectangle.end_y = e.layerY - _rectangle.start_y;
+            _rectangle.end_x = e.layerX - _rectangle.start_x;
 
             var brush_color = picker.color;
             _ctx_drawing_layer.strokeStyle = brush_color;
-            _ctx_drawing_layer.strokeRect(_rectangle.startX, _rectangle.startY, _rectangle.endX, _rectangle.endY);
+            _ctx_drawing_layer.strokeRect(_rectangle.start_x, _rectangle.start_y, _rectangle.end_x, _rectangle.end_y);
         }
     };
 
@@ -99,10 +99,10 @@ var rectangleTool = (function() {
             // 塗りつぶしの色を決める
             var brush_color = picker.color;
             _ctx_display_layer.fillStyle = brush_color;
-            _ctx_display_layer.fillRect(_rectangle.startX, _rectangle.startY, _rectangle.endX, _rectangle.endY);
+            _ctx_display_layer.fillRect(_rectangle.start_x, _rectangle.start_y, _rectangle.end_x, _rectangle.end_y);
 
             _rectangle.clear();
-            _ctx_drawing_layer.clearRect(0, 0, _canvasX, _canvasY);
+            _ctx_drawing_layer.clearRect(0, 0, _canvas_x, _canvas_y);
             _drawing_layer.removeEventListener("mousemove", onMouseMove, false);
         }
     };
