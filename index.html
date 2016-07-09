@@ -19,6 +19,7 @@
     <script type="text/javascript" src="js/paint.js"></script>
     <script type="text/javascript" src="js/text.js"></script>
     <script type="text/javascript" src="js/line.js"></script>
+    <script type="text/javascript" src="js/polygon.js"></script>
     <script type="text/javascript" src="js/selection.js"></script>
     <script type="text/javascript" src="js/rectangle.js"></script>
     <script type="text/javascript" src="js/kinetic-v5.0.1.min.js"></script>
@@ -40,8 +41,9 @@
 
         // 見せかけ
         var drawing = document.getElementById("drawing");
+        // 矩形
         var rectangle_instance = new rectangleTool(display, drawing);
-
+        // 選択
         var selection_instance = new selectionTool(display, drawing);
     </script>
 

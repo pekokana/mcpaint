@@ -10,9 +10,9 @@ var rectangleTool = (function() {
     var _display_layer;
     var _drawing_layer;
     // 描画コンテキスト
-    var _ctxDisplay_layer;
+    var _ctx_display_layer;
     // 破線用
-    var _ctxDrawingLayer;
+    var _ctx_drawing_layer;
 
     // キャンバスサイズ
     var _canvasY;
@@ -23,11 +23,11 @@ var rectangleTool = (function() {
         _drawing_layer = _drawing;
         _canvasY = _drawing_layer.clientHeight;
         _canvasX = _drawing_layer.clientWidth;
-        _ctxDisplay_layer = _display.getContext("2d");
-        _ctxDrawingLayer = _drawing.getContext("2d");
+        _ctx_display_layer = _display.getContext("2d");
+        _ctx_drawing_layer = _drawing.getContext("2d");
         // 破線
         var dashList = [1, 1]; // Create 3x3 dots and spaces
-        _ctxDrawingLayer.setLineDash(dashList);
+        _ctx_drawing_layer.setLineDash(dashList);
         _drawing_layer.addEventListener("mousedown", onMouseDown, false);
         _drawing_layer.addEventListener("mouseup", onMouseUp, false);
     };
@@ -79,13 +79,13 @@ var rectangleTool = (function() {
      */
     function onMouseMove(e) {
         if (getRectangle()) {
-            _ctxDrawingLayer.clearRect(0, 0, _canvasX, _canvasY);
+            _ctx_drawing_layer.clearRect(0, 0, _canvasX, _canvasY);
             _rectangle.endY = e.layerY - _rectangle.startY;
             _rectangle.endX = e.layerX - _rectangle.startX;
 
             var brush_color = picker.color;
-            _ctxDrawingLayer.strokeStyle = brush_color;
-            _ctxDrawingLayer.strokeRect(_rectangle.startX, _rectangle.startY, _rectangle.endX, _rectangle.endY);
+            _ctx_drawing_layer.strokeStyle = brush_color;
+            _ctx_drawing_layer.strokeRect(_rectangle.startX, _rectangle.startY, _rectangle.endX, _rectangle.endY);
         }
     };
 
@@ -98,11 +98,11 @@ var rectangleTool = (function() {
         if (getRectangle()) {
             // 塗りつぶしの色を決める
             var brush_color = picker.color;
-            _ctxDisplay_layer.fillStyle = brush_color;
-            _ctxDisplay_layer.fillRect(_rectangle.startX, _rectangle.startY, _rectangle.endX, _rectangle.endY);
+            _ctx_display_layer.fillStyle = brush_color;
+            _ctx_display_layer.fillRect(_rectangle.startX, _rectangle.startY, _rectangle.endX, _rectangle.endY);
 
             _rectangle.clear();
-            _ctxDrawingLayer.clearRect(0, 0, _canvasX, _canvasY);
+            _ctx_drawing_layer.clearRect(0, 0, _canvasX, _canvasY);
             _drawing_layer.removeEventListener("mousemove", onMouseMove, false);
         }
     };
