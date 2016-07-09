@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="farbtastic/farbtastic.css" type="text/css" media="all">
     <link rel="stylesheet" href="css/main.css" type="text/css" media="all">
     <link rel="stylesheet" href="css/paint.css" type="text/css" media="all">
-    <script type="text/javascript" src="localize/localize.js"></script>
     <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
     <script type="text/javascript" src="js/base64.js"></script>
@@ -23,6 +22,7 @@
     <script type="text/javascript" src="js/polygon.js"></script>
     <script type="text/javascript" src="js/selection.js"></script>
     <script type="text/javascript" src="js/rectangle.js"></script>
+    <script type="text/javascript" src="js/elipse.js"></script>
     <script type="text/javascript" src="js/kinetic-v5.0.1.min.js"></script>
     <script type="text/javascript" src="js/kPF1v.js"></script>
 </head>
@@ -46,6 +46,8 @@
         var rectangle_instance = new rectangleTool(display, drawing);
         // 選択
         var selection_instance = new selectionTool(display, drawing);
+        // 円形
+        var elipse_instance = new elipseTool(display, drawing);
     </script>
 
     <div id="tools">
@@ -116,7 +118,7 @@
                 <label for="polygon"><img src="icon/polygon.png" alt="多角形" title="多角形"></label>
             </li>
             <li>
-                <input type="radio" name="brush" id="elipse2" />
+                <input type="radio" name="brush" id="elipse1" />
                 <label for="elipse1"><img src="icon/elipse1.png" alt="楕円" title="楕円"></label>
             </li>
             <li>

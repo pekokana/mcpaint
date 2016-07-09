@@ -1,5 +1,6 @@
 'use strict';
 
+// public
 var picker;
 // main.jsから受信用
 const ipcRenderer = require('electron').ipcRenderer;
@@ -22,7 +23,6 @@ window.addEventListener("load", function() {
         var context = canvas.getContext('2d');
     }
 
-    // var picker = $.farbtastic('#colorpicker');
     picker = $.farbtastic('#colorpicker');
     picker.linkTo($("#color"));
 
@@ -147,20 +147,21 @@ window.addEventListener("load", function() {
         if (!flag) {
             return;
         }
-        var endX = e.pageX - $('canvas').offset().left - offset;
-        var endY = e.pageY - $('canvas').offset().top - offset;
+        var end_x = e.pageX - $('canvas').offset().left - offset;
+        var end_y = e.pageY - $('canvas').offset().top - offset;
 
         brush_color = picker.color;
 
         // それぞれの切り替え
-        var getBrush1 = $('#brush1').is(':checked');
-        var getBrush2 = $('#brush2').is(':checked');
-        var getBrush3 = $('#brush3').is(':checked');
-        var getBrush4 = $('#brush4').is(':checked');
-        var getBrushm = $('#miter').is(':checked');
-        var getEeraser = $('#eraser').is(':checked');
+        var is_brush1 = $('#brush1').is(':checked');
+        var is_brush2 = $('#brush2').is(':checked');
+        var is_brush3 = $('#brush3').is(':checked');
+        var is_brush4 = $('#brush4').is(':checked');
+        var is_brushm = $('#miter').is(':checked');
+        // 消しゴム
+        var is_eraser = $('#eraser').is(':checked');
 
-        if (getBrush1 == true) {
+        if (is_brush1 == true) {
             //ブラシ（通常）
             context.globalAlpha = alpha_size;
             context.beginPath();
@@ -172,10 +173,10 @@ window.addEventListener("load", function() {
             context.shadowBlur = 0;
             context.setTransform(1, 0, 0, 1, 0, 0);
             context.moveTo(start_x, start_y);
-            context.lineTo(endX, endY);
+            context.lineTo(end_x, end_y);
             context.stroke();
             context.closePath();
-        } else if (getBrush2 == true) {
+        } else if (is_brush2 == true) {
             //ブラシ（ぼかし１）
             context.globalAlpha = alpha_size;
             context.beginPath();
@@ -188,10 +189,10 @@ window.addEventListener("load", function() {
             context.shadowColor = brush_color;
             context.setTransform(1, 0, 0, 1, 0, 0);
             context.moveTo(start_x, start_y);
-            context.lineTo(endX, endY);
+            context.lineTo(end_x, end_y);
             context.stroke();
             context.closePath();
-        } else if (getBrush3 == true) {
+        } else if (is_brush3 == true) {
             //ブラシ（ぼかし２）
             brush_sizex2 = brush_size + brush_size;
             context.globalAlpha = alpha_size;
@@ -205,10 +206,10 @@ window.addEventListener("load", function() {
             context.shadowColor = brush_color;
             context.setTransform(1, 0, 0, 1, 0, 0);
             context.moveTo(start_x, start_y);
-            context.lineTo(endX, endY);
+            context.lineTo(end_x, end_y);
             context.stroke();
             context.closePath();
-        } else if (getBrush4 == true) {
+        } else if (is_brush4 == true) {
             //ブラシ（パステル）
             context.globalAlpha = 0.1;
             context.beginPath();
@@ -221,11 +222,10 @@ window.addEventListener("load", function() {
             context.shadowColor = brush_color;
             context.setTransform(1, 0, 0, 1, 0, 0);
             context.moveTo(start_x, start_y);
-            context.lineTo(endX, endY);
+            context.lineTo(end_x, end_y);
             context.stroke();
             context.closePath();
-
-        } else if (getBrushm == true) {
+        } else if (is_brushm == true) {
             //ブラシ（四角）
             context.globalAlpha = alpha_size;
             context.beginPath();
@@ -237,10 +237,10 @@ window.addEventListener("load", function() {
             context.shadowBlur = 0;
             context.setTransform(1, 0, 0, 1, 0, 0);
             context.moveTo(start_x, start_y);
-            context.lineTo(endX, endY);
+            context.lineTo(end_x, end_y);
             context.stroke();
             context.closePath();
-        } else if (getEeraser == true) {
+        } else if (is_eraser == true) {
             //消しゴム
             context.globalAlpha = 1;
             context.beginPath();
@@ -252,13 +252,13 @@ window.addEventListener("load", function() {
             context.shadowBlur = 0;
             context.setTransform(1, 0, 0, 1, 0, 0);
             context.moveTo(start_x, start_y);
-            context.lineTo(endX, endY);
+            context.lineTo(end_x, end_y);
             context.stroke();
             context.closePath();
         }
 
-        start_x = endX;
-        start_y = endY;
+        start_x = end_x;
+        start_y = end_y;
     });
 
     // $('canvas').on('mouseup', function() {
@@ -275,7 +275,6 @@ window.addEventListener("load", function() {
  * TODO: リサイズ
  */
 function resizeCanvas() {
-
     // 虫眼鏡
     var w = 110;
     var h = 110;
