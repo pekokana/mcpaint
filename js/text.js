@@ -1,6 +1,7 @@
 'use strict';
 
 // TODO: テキスト
+// http://www.html5.jp/canvas/ref/method/fillText.html
 window.addEventListener("load", function() {
     var start_x;
     var start_y;

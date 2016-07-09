@@ -68,3 +68,5 @@ http://jsdo.it/imaya/seedfill
 
 scroll
 https://github.com/popham/scroller
+
+ファイルから開く

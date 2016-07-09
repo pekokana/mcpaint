@@ -49,7 +49,8 @@
         <!--TODO: 凹むボタンの仕組-->
         <ul class="donate-now">
             <li>
-                <!--<input type="radio" name="brush" id="selection1" checked="checked" /><label for="selection1"><img src="icon/selection.png" alt="範囲選択" title="範囲選択"></label>-->
+                <input type="radio" name="brush" id="selection1" checked="checked" />
+                <label for="selection1"><img src="icon/na.png" alt="範囲選択" title="範囲選択"></label>
             </li>
             <li>
                 <input type="radio" name="brush" id="selection2" checked="checked" />
@@ -68,46 +69,57 @@
                 <label for="spuit"><img src="icon/spuit.png" alt="スポイト" title="スポイト"></label>
             </li>
             <li>
-                <!--<input type="radio" name="brush" id="zoom" />
-                <label for="zoom"><img src="icon/zoom.png" alt="拡大" title="拡大"></label>-->
+                <input type="radio" name="brush" id="zoom" />
+                <!--<label for="zoom"><img src="icon/zoom.png" alt="拡大" title="拡大"></label>-->
+                <label  for="zoom"><img src="icon/na.png" alt="拡大" title="拡大"></label>
                 <!--<input type="radio" name="brush" id="brush2" /><label for="brush2"><img src="pen2.gif" alt="ぼかし１" title="ぼかし１"></label>
                     <input type="radio" name="brush" id="brush3" /><label for="brush3"><img src="pen3.gif" alt="ぼかし２" title="ぼかし２"></label>-->
                 <!--<input type="radio" name="brush" id="brush4" /><label for="brush4"><img src="pen4.gif" alt="パステル" title="パステル"></label>-->
             </li>
             <li>
-                <input type="radio" name="brush" id="miter" /><label for="miter"><img src="icon/penm.png" alt="角ペン" title="角ペン"></label>
+                <input type="radio" name="brush" id="miter" />
+                <label for="miter"><img src="icon/penm.png" alt="角ペン" title="角ペン"></label>
             </li>
             <li>
-                <input type="radio" name="brush" id="brush1" /><label for="brush1"><img src="icon/brush1.png" alt="ブラシ" title="ブラシ"></label>
+                <input type="radio" name="brush" id="brush1" />
+                <label for="brush1"><img src="icon/brush1.png" alt="ブラシ" title="ブラシ"></label>
             </li>
             <li>
                 <!--スプレー-->
-                <input type="radio" name="brush" id="spray" /><label for="spray"><img src="icon/spray.png" alt="スプレー" title="スプレ"></label>
+                <input type="radio" name="brush" id="spray" />
+                <label for="spray"><img src="icon/spray.png" alt="スプレー" title="スプレ"></label>
             </li>
             <li>
                 <!--文字-->
-                <!--http://www.html5.jp/canvas/ref/method/fillText.html-->
-                <input type="radio" name="brush" id="text" /><label for="text"><img src="icon/text.png" alt="テキスト" title="テキスト"></label>
+                <input type="radio" name="brush" id="text" />
+                <label for="text"><img src="icon/text.png" alt="テキスト" title="テキスト"></label>
             </li>
             <li>
                 <!--直線ー-->
-                <input type="radio" name="brush" id="line" /><label for="line"><img src="icon/line.png" alt="直線" title="直線"></label>
+                <input type="radio" name="brush" id="line" />
+                <label for="line"><img src="icon/line.png" alt="直線" title="直線"></label>
             </li>
             <li>
                 <!--波線-->
-                <input type="radio" name="brush" id="wave-line" /><label for="wave-line"><img src="icon/wave-line.png" alt="波線" title="波線"></label>
+                <input type="radio" name="brush" id="wave-line" />
+                <label for="wave-line"><img src="icon/wave-line.png" alt="波線" title="波線"></label>
             </li>
             <li>
-                <input type="radio" name="brush" id="rectangle" /><label for="rectangle"><img src="icon/rectangle.png" alt="矩形" title="矩形"></label>
+                <input type="radio" name="brush" id="rectangle" />
+                <label for="rectangle"><img src="icon/rectangle.png" alt="矩形" title="矩形"></label>
             </li>
             <li>
-                <input type="radio" name="brush" id="polygon" /><label for="polygon"><img src="icon/polygon.png" alt="多角形" title="多角形"></label>
+                <input type="radio" name="brush" id="polygon" />
+                <label for="polygon"><img src="icon/polygon.png" alt="多角形" title="多角形"></label>
             </li>
             <li>
-                <input type="radio" name="brush" id="elipse2" /><label for="elipse1"><img src="icon/elipse1.png" alt="楕円" title="楕円"></label>
+                <input type="radio" name="brush" id="elipse2" />
+                <label for="elipse1"><img src="icon/elipse1.png" alt="楕円" title="楕円"></label>
             </li>
             <li>
-                <!--<input type="radio" name="brush" id="elipse2" /><label for="elipse2"><img src="icon/elipse2.png" alt="四角い楕円" title=四角い楕円"></label>-->
+                <input type="radio" name="brush" id="elipse2" />
+                <!--<label for="elipse2"><img src="icon/elipse2.png" alt="四角い楕円" title=四角い楕円"></label>-->
+                <label for="elipse2"><img src="icon/na.png" alt="四角い楕円" title=四角い楕円"></label>
             </li>
         </ul>
     </div>
@@ -120,6 +132,7 @@
         <input type="button" id="back3" value="透明" />
         <button onclick="resizeCanvas()">リサイズ</button>
     </div>
+
     <div id="colorlist">
         <ul>
             <li class="palette" style="background-color:#000000">
