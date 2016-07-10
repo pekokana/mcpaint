@@ -81,7 +81,8 @@ app.on('ready', function() {
                 console.log("後で作る");
             }
         }, {
-            label: "Save",
+            // label: "Save",
+            label: localize.save,
             accelerator: "CmdOrCtrl+S",
             click: function() {
                 // draw.jsに送る
@@ -92,7 +93,8 @@ app.on('ready', function() {
     }, {
         label: 'Edit',
         submenu: [{
-            label: 'Resize',
+            // label: 'Resize',
+            label: localize.resize,
             accelerator: "CmdOrCtrl+E",
             click: function() {
                 showResize();
@@ -126,13 +128,15 @@ app.on('ready', function() {
                         }
                     }, */
             {
-                label: 'Toggle Full Screen',
+                // label: 'Toggle Full Screen',
+                label: localize.full_screen,
                 accelerator: 'Ctrl+Command+F',
                 click: function() {
                     mainWindow.setFullScreen(!mainWindow.isFullScreen());
                 }
             }, {
-                label: 'Toggle Developer Tools',
+                // label: 'Toggle Developer Tools',
+                label: localize.developer_tools,
                 accelerator: 'Alt+Command+I',
                 click: function() {
                     mainWindow.toggleDevTools();
