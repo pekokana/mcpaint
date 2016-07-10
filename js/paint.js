@@ -15,6 +15,14 @@ function getPointFromEvent(event) {
     }
 }
 
+/**
+ * キャンバスをクリア
+ */
+function clearCanvas() {
+    context.clearRect(0, 0, $('canvas').width(), $('canvas').height());
+}
+
+
 $(function() {
     $('#undo').click(function(e) {
         context.putImageData(undoImage, 0, 0);
@@ -26,7 +34,7 @@ $(function() {
 
     $('#clear').click(function(e) {
         e.preventDefault();
-        context.clearRect(0, 0, $('canvas').width(), $('canvas').height());
+        clearCanvas();
     });
 
     $('#save').click(function() {
@@ -43,15 +51,6 @@ $(function() {
 
     /* ドロップされた場合 */
     document.ondrop = function(e) {
-        // var files = e.dataTransfer.files;
-        // var file = files[0];
-        // console.log(file);
-        // if(file.type === "image/png") {
-        //     console.log('png');
-        // }
-        // console.log(file.type);
-        // console.log(file.name);
-        // console.log(file.path);
         drag(e);
         e.preventDefault(); // イベントの伝搬を止めて、アプリケーションのHTMLとファイルが差し替わらないようにする
         return false;
@@ -76,8 +75,7 @@ ipcRenderer.on('file-save', function() {
  */
 function drag(e) {
     var i;
-    //クリップボードに含まれる画像データを検索
-    // var items = e.clipboardData.items;
+    // ドロップしたアイテム
     var items = e.dataTransfer.items;
     var imageItem = null;
     for (i = 0; i < items.length; i++) {
@@ -88,16 +86,18 @@ function drag(e) {
     }
 
     if (!imageItem) {
-        console.log("clipboard does not contain an image.");
+        console.log("droped item does not contain an image.");
         return;
     }
 
-    //clipboardData.items -> Blob -> Image の順に変換
+    // 一旦消す
+    // clearCanvas();
+    // dataTransfer.items -> Blob -> Image の順に変換
     var blob = imageItem.getAsFile();
     var blobURL = window.URL.createObjectURL(blob);
     var img = new Image();
     img.onload = function() {
-        //Imageをキャンバスに描画
+        // Imageをキャンバスに描画
         var context = canvas.getContext("2d");
         context.drawImage(img, 0, 0);
     };
