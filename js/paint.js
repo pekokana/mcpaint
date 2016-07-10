@@ -35,9 +35,16 @@ $(function() {
         window.open(d, 'save');
     });
 
-    /* documentにドラッグされた場合 / ドロップされた場合 */
-    document.ondragover = document.ondrop = function(e) {
+    /* documentにドラッグされた場合 */
+    document.ondragover = function(e) {
       e.preventDefault(); // イベントの伝搬を止めて、アプリケーションのHTMLとファイルが差し替わらないようにする
+      return false;
+    };
+
+    /* ドロップされた場合 */
+    document.ondrop = function(e) {
+      e.preventDefault(); // イベントの伝搬を止めて、アプリケーションのHTMLとファイルが差し替わらないようにする
+      drag();
       return false;
     };
 });
@@ -54,3 +61,9 @@ function saveData() {
 ipcRenderer.on('file-save', function() {
     saveData();
 });
+
+/**
+ * ドロップ時の処理
+ */
+function drag() {
+}
