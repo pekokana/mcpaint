@@ -18,7 +18,8 @@ function getPointFromEvent(event) {
 /**
  * キャンバスをクリア
  */
-function clearCanvas() {
+function clearCanvas(canvas) {
+    var context = canvas.getContext("2d");
     context.clearRect(0, 0, $('canvas').width(), $('canvas').height());
 }
 
@@ -91,7 +92,7 @@ function drag(e) {
     }
 
     // 一旦消す
-    // clearCanvas();
+    clearCanvas(canvas);
     // dataTransfer.items -> Blob -> Image の順に変換
     var blob = imageItem.getAsFile();
     var blobURL = window.URL.createObjectURL(blob);
