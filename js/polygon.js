@@ -28,6 +28,12 @@ window.addEventListener("load", function() {
      * 描画開始
      */
     function startDrawing(e) {
+        var is_polygon = $('#polygon').is(':checked');
+
+        if (!is_polygon == true) {
+            return;
+        }
+
         undo_image = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
         flag = true;
         // start_x = e.pageX - $(this).offset().left - offset;
