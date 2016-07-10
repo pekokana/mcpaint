@@ -6,7 +6,7 @@ window.addEventListener("load", function() {
     var start_y;
     var offset = 5;
     var flag = false;
-    var get_image;
+    // var get_image;
     var undo_image;
     var brush_size = 1;
     var alpha_size = 1;
@@ -19,16 +19,50 @@ window.addEventListener("load", function() {
     var canvas_height = drawing.clientHeight;
 
     // キャンバス
-    var canvas = document.getElementById("canvas");
+    var canas = document.getElementById("canvas");
     if (canvas.getContext) {
         var context = canvas.getContext('2d');
     }
 
-    $('canvas').mousedown(function(e) {
+    /**
+     * 描画開始
+     */
+    function startDrawing(e) {
         undo_image = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
         flag = true;
-        start_x = e.pageX - $(this).offset().left - offset;
-        start_y = e.pageY - $(this).offset().top - offset;
+        // start_x = e.pageX - $(this).offset().left - offset;
+        // start_y = e.pageY - $(this).offset().top - offset;
+        start_x = e.pageX - $('canvas').offset().left - offset;
+        start_y = e.pageY - $('canvas').offset().top - offset;
+    }
+
+    /**
+     * 描画終了
+     * 
+     * @param {any} e
+     */
+    function stopDrawing(e) {
+            var end_x = e.pageX - $('canvas').offset().left - offset;
+            var end_y = e.pageY - $('canvas').offset().top - offset;
+            var brush_color = picker.color;
+            context.globalAlpha = alpha_size;
+            context.beginPath();
+            context.globalCompositeOperation = 'source-over';
+            context.strokeStyle = brush_color;
+            context.lineWidth = brush_size;
+            context.lineJoin = 'miter';
+            context.lineCap = 'butt';
+            context.shadowBlur = 0;
+            context.setTransform(1, 0, 0, 1, 0, 0);
+            context.moveTo(start_x, start_y);
+            context.lineTo(end_x, end_y);
+            context.stroke();
+            context.closePath();
+    }
+
+    $('canvas').mousedown(function(e) {
+        stopDrawing(e);
+        startDrawing(e);
         return false; // for chrome
     });
 
@@ -62,36 +96,8 @@ window.addEventListener("load", function() {
             ctx_drawing_layer.lineTo(end_x, end_y);
             ctx_drawing_layer.stroke();
             ctx_drawing_layer.closePath();
+        } else {
+            flag = false;
         }
-    });
-
-    window.addEventListener("mouseup", function(e) { // キャンバスでなくウィンドウに
-        if (!flag) {
-            return;
-        }
-
-        var is_polygon = $('#polygon').is(':checked');
-        var end_x = e.pageX - $('canvas').offset().left - offset;
-        var end_y = e.pageY - $('canvas').offset().top - offset;
-
-        if (is_polygon) {
-            var brush_color = picker.color;
-            context.globalAlpha = alpha_size;
-            context.beginPath();
-            context.globalCompositeOperation = 'source-over';
-            context.strokeStyle = brush_color;
-            context.lineWidth = brush_size;
-            context.lineJoin = 'miter';
-            context.lineCap = 'butt';
-            context.shadowBlur = 0;
-            context.setTransform(1, 0, 0, 1, 0, 0);
-            context.moveTo(start_x, start_y);
-            context.lineTo(end_x, end_y);
-            context.stroke();
-            context.closePath();
-        }
-
-        get_image = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
-        flag = false;
     });
 })
