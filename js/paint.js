@@ -23,7 +23,6 @@ function clearCanvas(canvas) {
     context.clearRect(0, 0, $('canvas').width(), $('canvas').height());
 }
 
-
 $(function() {
     $('#undo').click(function(e) {
         context.putImageData(undoImage, 0, 0);
@@ -98,6 +97,9 @@ function drag(e) {
     var blobURL = window.URL.createObjectURL(blob);
     var img = new Image();
     img.onload = function() {
+        // TODO: キャンバスを後でリサイズするかも?
+        console.log(img.height);
+        console.log(img.width);
         // Imageをキャンバスに描画
         var context = canvas.getContext("2d");
         context.drawImage(img, 0, 0);
