@@ -37,15 +37,19 @@ $(function() {
 
     /* documentにドラッグされた場合 */
     document.ondragover = function(e) {
-      e.preventDefault(); // イベントの伝搬を止めて、アプリケーションのHTMLとファイルが差し替わらないようにする
-      return false;
+        e.preventDefault(); // イベントの伝搬を止めて、アプリケーションのHTMLとファイルが差し替わらないようにする
+        return false;
     };
 
     /* ドロップされた場合 */
     document.ondrop = function(e) {
-      e.preventDefault(); // イベントの伝搬を止めて、アプリケーションのHTMLとファイルが差し替わらないようにする
-      drag();
-      return false;
+        var file = e.dataTransfer.files[0];
+        console.log(file);
+        console.log(file.name);
+        console.log(file.path);
+        // drag();
+        e.preventDefault(); // イベントの伝搬を止めて、アプリケーションのHTMLとファイルが差し替わらないようにする
+        return false;
     };
 });
     
@@ -66,4 +70,32 @@ ipcRenderer.on('file-save', function() {
  * ドロップ時の処理
  */
 function drag() {
+    var i;
+    //クリップボードに含まれる画像データを検索
+    var items = e.clipboardData.items;
+    var imageItem = null;
+    for (i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf("image/") != -1) {
+            imageItem = items[i];
+            break;
+        }
+    }
+
+    if (!imageItem) {
+        console.log("clipboard does not contain an image.");
+        return;
+    }
+
+    //clipboardData.items -> Blob -> Image の順に変換
+    var blob = imageItem.getAsFile();
+    var blobURL = window.URL.createObjectURL(blob);
+    var img = new Image();
+    img.onload = function() {
+        //Imageをキャンバスに描画
+        var context = canvas.getContext("2d");
+        // context.drawImage(img, 0, 0);
+        // 押下した位置へ
+        context.drawImage(img, mousePos.x, mousePos.y);
+    };
+    img.src = blobURL;
 }

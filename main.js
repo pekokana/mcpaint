@@ -22,7 +22,9 @@ app.on('window-all-closed', function() {
         app.quit();
 });
 
-// リサイズ画面
+/**
+ * リサイズ画面
+ */
 function showResize() {
     const windowManager = require('electron-window-manager');
     var new_win = 'file://' + __dirname + '/page/window_size.html'
