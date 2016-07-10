@@ -34,10 +34,18 @@ $(function() {
         d = d.replace('image/png', 'image/octet-stream');
         window.open(d, 'save');
     });
-});
 
-// 保存処理　(Canvas2Image)
-//　http://www.nihilogic.dk/labs/canvas2image/
+    /* documentにドラッグされた場合 / ドロップされた場合 */
+    document.ondragover = document.ondrop = function(e) {
+      e.preventDefault(); // イベントの伝搬を止めて、アプリケーションのHTMLとファイルが差し替わらないようにする
+      return false;
+    };
+});
+    
+/**
+ * 保存処理　(Canvas2Image)
+ * http://www.nihilogic.dk/labs/canvas2image/
+ */
 function saveData() {
     var canvas = document.getElementById("canvas");
     Canvas2Image.saveAsPNG(canvas); // PNG形式で保存
