@@ -121,15 +121,7 @@ app.on('ready', function() {
                 click(item, focusedWindow) {
                 if (focusedWindow) focusedWindow.reload();
                 }
-            },
-            /*{
-                        label: 'Reload',
-                        accelerator: 'Command+R',
-                        click: function() {
-                            mainWindow.restart();
-                        }
-                    }, */
-            {
+            }, {
                 // label: 'Toggle Full Screen',
                 label: localize.full_screen,
                 accelerator: 'Ctrl+Command+F',
