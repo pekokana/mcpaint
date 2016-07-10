@@ -43,11 +43,16 @@ $(function() {
 
     /* ドロップされた場合 */
     document.ondrop = function(e) {
-        var file = e.dataTransfer.files[0];
-        console.log(file);
-        console.log(file.name);
-        console.log(file.path);
-        // drag();
+        // var files = e.dataTransfer.files;
+        // var file = files[0];
+        // console.log(file);
+        // if(file.type === "image/png") {
+        //     console.log('png');
+        // }
+        // console.log(file.type);
+        // console.log(file.name);
+        // console.log(file.path);
+        drag(e);
         e.preventDefault(); // イベントの伝搬を止めて、アプリケーションのHTMLとファイルが差し替わらないようにする
         return false;
     };
@@ -69,10 +74,11 @@ ipcRenderer.on('file-save', function() {
 /**
  * ドロップ時の処理
  */
-function drag() {
+function drag(e) {
     var i;
     //クリップボードに含まれる画像データを検索
-    var items = e.clipboardData.items;
+    // var items = e.clipboardData.items;
+    var items = e.dataTransfer.items;
     var imageItem = null;
     for (i = 0; i < items.length; i++) {
         if (items[i].type.indexOf("image/") != -1) {
@@ -93,9 +99,7 @@ function drag() {
     img.onload = function() {
         //Imageをキャンバスに描画
         var context = canvas.getContext("2d");
-        // context.drawImage(img, 0, 0);
-        // 押下した位置へ
-        context.drawImage(img, mousePos.x, mousePos.y);
+        context.drawImage(img, 0, 0);
     };
     img.src = blobURL;
 }
