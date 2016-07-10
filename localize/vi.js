@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    title: "MCペイント",
+    quit: "終了",
     copy: "Sao Chép",
     reload: "Load Lại",
     new_file: "Tạo Tập Tin Mới",

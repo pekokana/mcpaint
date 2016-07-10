@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    title: "MC Paint",
+    quit: "Quit",
     copy: "Copy",
     reload: "Reload",
     new_file: "New File",

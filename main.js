@@ -54,7 +54,8 @@ app.on('ready', function() {
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
-        title: "MCペイント",
+        // title: "MCペイント",
+        title: localize.title,
         // frame: false,
         // resizable: false,
         // transparent: true,
@@ -65,7 +66,8 @@ app.on('ready', function() {
     var template = [{
         label: 'Electron',
         submenu: [{
-            label: 'Quit',
+            // label: 'Quit',
+            label: localize.quit,
             accelerator: "CmdOrCtrl+Q",
             click: function() {
                 app.quit();
@@ -153,7 +155,8 @@ app.on('ready', function() {
     if (false) {
         const windowManager = require('electron-window-manager');
         var window_size = 'file://' + __dirname + '/page/hpme.html'
-        windowManager.open('home', 'キャンバスサイズ変更', window_size);
+        // キャンバスサイズ変更
+        windowManager.open('home', localize.resize, window_size);
     }
     mainWindow.loadURL('file://' + __dirname + '/index.html');
 

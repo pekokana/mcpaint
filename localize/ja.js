@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    title: "MCペイント",
+    quit: "終了",
     copy : "コピー",
     reload: "リロード",
     new_file: "新規ファイル",
