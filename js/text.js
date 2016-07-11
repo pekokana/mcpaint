@@ -1,6 +1,7 @@
 'use strict';
 
 // TODO: テキスト
+// http://goldfirestudios.com/blog/108/CanvasInput-HTML5-Canvas-Text-Input
 // http://www.html5.jp/canvas/ref/method/fillText.html
 window.addEventListener("load", function() {
     var start_x;
@@ -13,6 +14,22 @@ window.addEventListener("load", function() {
     var alphaSize = 1;
     var brush_color = '#000000';
 
+    var input = new CanvasInput({
+        canvas: document.getElementById('drawing'),
+        fontSize: 18,
+        fontFamily: 'Arial',
+        fontColor: '#212121',
+        fontWeight: 'bold',
+        width: 300,
+        padding: 8,
+        borderWidth: 1,
+        borderColor: '#000',
+        borderRadius: 3,
+        boxShadow: '1px 1px 0px #fff',
+        innerShadow: '0px 0px 5px rgba(0, 0, 0, 0.5)',
+        placeHolder: 'Enter message here...'
+    });
+
     // キャンバス
     var canvas = document.getElementById("canvas");
     if (canvas.getContext) {
@@ -20,10 +37,11 @@ window.addEventListener("load", function() {
     }
 
     $('canvas').mousedown(function(e) {
-        undoImage = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
-        flag = true;
-        start_x = e.pageX - $(this).offset().left - offset;
-        start_y = e.pageY - $(this).offset().top - offset;
+        // undoImage = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
+        // flag = true;
+        // start_x = e.pageX - $(this).offset().left - offset;
+        // start_y = e.pageY - $(this).offset().top - offset;
+        // context.strokeText("text", start_x, start_y)
         return false; // for chrome
     });
 
