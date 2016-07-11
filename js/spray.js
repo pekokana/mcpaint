@@ -8,15 +8,10 @@
  * @returns
  */
 var sprayTool = (function() {
-    //キャンバスエレメント
-    // var _displayLayer;
+    // キャンバスエレメント
     var _drawingLayer;
     // 描画コンテキスト
-    var _ctxDisplayLayer;
-
-    // キャンバスサイズ
-    // var _canvasY;
-    // var _canvasX;
+    var _ctx_display_layer;
 
     var _intervalId, // used to track the current interval ID
         _center; // the current center to spray
@@ -30,15 +25,8 @@ var sprayTool = (function() {
      * @param {any} _drawing
      */
     var app = function(_display, _drawing) {
-        // _displayLayer = _display;
         _drawingLayer = _drawing;
-        // _canvasY = _drawingLayer.clientHeight;
-        // _canvasX = _drawingLayer.clientWidth;
-        _ctxDisplayLayer = _display.getContext("2d");
-        // _ctxDrawingLayer = _drawing.getContext("2d");
-        // 破線
-        var dashList = [1, 1]; // Create 3x3 dots and spaces
-        // _ctxDrawingLayer.setLineDash(dashList);
+        _ctx_display_layer = _display.getContext("2d");
         _drawingLayer.addEventListener("mousedown", onMouseDown, false);
         _drawingLayer.addEventListener("mouseup", onMouseUp, false);
     };
@@ -91,14 +79,17 @@ var sprayTool = (function() {
     function onMouseDown(e) {
         if (getSpray()) {
             var position = getPointFromEvent(e);
-            // this.startDrawing(position);
             startDrawing(position);
             _drawingLayer.addEventListener("mousemove", onMouseMove, false);
         }
     };
 
-    // this.spray = function() {
+    // インターバルでスプレーする
     var spray = function() {
+        // 色を変える
+        var brush_color = picker.color;
+        _ctx_display_layer.fillStyle = brush_color;
+
         var centerX = _center.x,
             centerY = _center.y,
             i;
@@ -108,20 +99,16 @@ var sprayTool = (function() {
             var x = centerX + offset.x,
                 y = centerY + offset.y;
 
-            // drawingCxt.fillRect(x, y, 1, 1);
-            _ctxDisplayLayer.fillRect(x, y, 1, 1);
+            _ctx_display_layer.fillRect(x, y, 1, 1);
         }
     };
 
-    // this.startDrawing = function(position) {
     var startDrawing = function(position) {
         _center = position;
         // spray once every 200 milliseconds
-        // _intervalId = setInterval(this.spray, 10);
         _intervalId = setInterval(spray, 10);
     };
 
-    // this.finishDrawing = function(position) {
     var finishDrawing = function(position) {
         clearInterval(_intervalId);
     };
@@ -146,7 +133,6 @@ var sprayTool = (function() {
     function onMouseUp(e) {
         if (getSpray()) {
             var position = getPointFromEvent(e);
-            // this.finishDrawin(position);
             finishDrawing(position);
         }
     };
