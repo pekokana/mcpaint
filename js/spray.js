@@ -28,7 +28,9 @@ var sprayTool = (function() {
         _drawingLayer = _drawing;
         _ctx_display_layer = _display.getContext("2d");
         _drawingLayer.addEventListener("mousedown", onMouseDown, false);
-        _drawingLayer.addEventListener("mouseup", onMouseUp, false);
+        // _drawingLayer.addEventListener("mouseup", onMouseUp, false);
+        // これはdocumentにしないとcanvasから離れたときに解除されない
+        document.addEventListener("mouseup", onMouseUp, false);
     };
 
     /**
@@ -105,10 +107,13 @@ var sprayTool = (function() {
 
     var startDrawing = function(position) {
         _center = position;
+        // 以前のを消す
+        clearInterval(_intervalId);
         // spray once every 200 milliseconds
         _intervalId = setInterval(spray, 10);
     };
 
+    // スプレー終了
     var finishDrawing = function(position) {
         clearInterval(_intervalId);
     };
