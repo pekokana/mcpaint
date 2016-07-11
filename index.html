@@ -20,6 +20,7 @@
     <script type="text/javascript" src="js/paint.js"></script>
     <script type="text/javascript" src="js/text.js"></script>
     <script type="text/javascript" src="js/line.js"></script>
+    <script type="text/javascript" src="js/spray.js"></script>
     <script type="text/javascript" src="js/polygon.js"></script>
     <script type="text/javascript" src="js/selection.js"></script>
     <script type="text/javascript" src="js/rectangle.js"></script>
@@ -49,6 +50,8 @@
         var selection_instance = new selectionTool(display, drawing);
         // 円形
         var elipse_instance = new elipseTool(display, drawing);
+        // スプレー
+        var spray_instance = new sprayTool(display, drawing);
     </script>
 
     <div id="tools">
@@ -77,7 +80,7 @@
             <li>
                 <input type="radio" name="brush" id="zoom" />
                 <!--<label for="zoom"><img src="icon/zoom.png" alt="拡大" title="拡大"></label>-->
-                <label  for="zoom"><img src="icon/na.png" alt="拡大" title="拡大"></label>
+                <label for="zoom"><img src="icon/na.png" alt="拡大" title="拡大"></label>
                 <!--<input type="radio" name="brush" id="brush2" /><label for="brush2"><img src="pen2.gif" alt="ぼかし１" title="ぼかし１"></label>
                     <input type="radio" name="brush" id="brush3" /><label for="brush3"><img src="pen3.gif" alt="ぼかし２" title="ぼかし２"></label>-->
                 <!--<input type="radio" name="brush" id="brush4" /><label for="brush4"><img src="pen4.gif" alt="パステル" title="パステル"></label>-->
