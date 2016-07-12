@@ -75,13 +75,14 @@ window.addEventListener("load", function() {
     }
 
     $('canvas').mousedown(function(e) {
-        if (flag) return;
+        var is_text = $('#text').is(':checked');
+        if (!is_text || flag) return;
 
-        // undoImage = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
         flag = true;
         start_x = e.pageX - $(this).offset().left - offset;
         start_y = e.pageY - $(this).offset().top - offset;
-        // 生成
+
+        // テキストボックス生成
         createInput(start_x, start_y);
         return false; // for chrome
     });
