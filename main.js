@@ -63,8 +63,6 @@ app.on('ready', function() {
         // transparent: true,
     });
 
-    // デバッグするためのDevToolsを表示
-    // mainWindow.webContents.openDevTools();
     var template = [{
         label: 'Electron',
         submenu: [{

@@ -51,6 +51,9 @@ window.addEventListener("load", function() {
      * @param {any} y
      */
     function createInput(x, y) {
+        var brush_color = picker.color;
+        var clic_color = new RGBColor(brush_color);
+
         input = new CanvasInput({
             x: x,
             y: y,
@@ -58,8 +61,9 @@ window.addEventListener("load", function() {
             fontSize: 18,
             fontFamily: 'Arial',
             // fontFamily: 'ＭＳ Ｐゴシック',
-            fontColor: '#212121',
-            fontWeight: 'bold',
+            // fontColor: '#212121',
+            fontColor: clic_color.toHex(),
+            fontWeigt: 'bold',
             width: 300,
             padding: 8,
             borderWidth: 1,
