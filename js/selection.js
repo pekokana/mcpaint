@@ -104,8 +104,9 @@ var selectionTool = (function() {
             _rectangle.endY = e.layerY - _rectangle.startY;
             _rectangle.endX = e.layerX - _rectangle.startX;
 
-            var brush_color = picker.color;
-            _ctxDrawingLayer.strokeStyle = brush_color;
+            // var brush_color = picker.color;
+            // _ctxDrawingLayer.strokeStyle = brush_color;
+            _ctxDrawingLayer.strokeStyle = 'black';
             _ctxDrawingLayer.strokeRect(_rectangle.startX, _rectangle.startY, _rectangle.endX, _rectangle.endY);
         }
     };
@@ -117,11 +118,6 @@ var selectionTool = (function() {
      */
     function onMouseUp(e) {
         if (getSelection2()) {
-            // 塗りつぶしの色を決める
-            // var brush_color = picker.color;
-            // _ctxDisplayLayer.fillStyle = brush_color;
-            // _ctxDisplayLayer.fillRect(_rectangle.startX, _rectangle.startY, _rectangle.endX, _rectangle.endY);
-
             _rectangle.clear();
             _ctxDrawingLayer.clearRect(0, 0, _canvasX, _canvasY);
             _drawingLayer.removeEventListener("mousemove", onMouseMove, false);
