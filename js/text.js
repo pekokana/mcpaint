@@ -9,15 +9,40 @@ window.addEventListener("load", function() {
     var offset = 5;
     var flag = false;
     var get_image;
-    var undo_image;
     var brush_size = 1;
     var alpha_size = 1;
-    var brush_color = '#000000';
+
+    // キャンバス
+    var canvas = document.getElementById("canvas");
+    if (canvas.getContext) {
+        var context = canvas.getContext('2d');
+    }
 
     var drawing = document.getElementById('drawing');
 
     // テキスト入力のツール
     var input;
+
+    /**
+     * Enterキー入れた時の処理
+     * 
+     * @param {any} e
+     */
+    function onEnter(e) {
+        console.log(e);
+        // 中のテキスト
+        var input_text = input.value();
+        // context.font = "18px 'ＭＳ Ｐゴシック'";
+        context.font = "18px 'Arial'";
+        // 色を変える
+        var brush_color = picker.color;
+        context.strokeStyle = brush_color;
+        context.strokeText(input_text, start_x, start_y);
+        // drawing.style.display = "none";
+        console.log(input);
+        // $("input").remove();
+        flag = false;
+    }
 
     /**
      * テキスト入力のツールを作る
@@ -32,6 +57,7 @@ window.addEventListener("load", function() {
             canvas: drawing,
             fontSize: 18,
             fontFamily: 'Arial',
+            // fontFamily: 'ＭＳ Ｐゴシック',
             fontColor: '#212121',
             fontWeight: 'bold',
             width: 300,
@@ -41,30 +67,22 @@ window.addEventListener("load", function() {
             borderRadius: 3,
             boxShadow: '1px 1px 0px #fff',
             innerShadow: '0px 0px 5px rgba(0, 0, 0, 0.5)',
-            placeHolder: 'Enter message here...'
+            placeHolder: 'Enter message here...',
+            onsubmit: onEnter
         });
-    }
-
-    // 一旦隠す
-    // drawing.style.display = "none";
-    // input.destroy();
-
-    // キャンバス
-    var canvas = document.getElementById("canvas");
-    if (canvas.getContext) {
-        var context = canvas.getContext('2d');
+        // フォーカスする
+        input.focus();
     }
 
     $('canvas').mousedown(function(e) {
-        if(flag) return;
+        if (flag) return;
 
         // undoImage = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
         flag = true;
         start_x = e.pageX - $(this).offset().left - offset;
         start_y = e.pageY - $(this).offset().top - offset;
-        // context.strokeText("text", start_x, start_y)
+        // 生成
         createInput(start_x, start_y);
-        // drawing.style.display = "block";
         return false; // for chrome
     });
 
@@ -78,8 +96,7 @@ window.addEventListener("load", function() {
 
         var is_text = $('#text').is(':checked');
 
-        if (is_text == true) {
-        }
+        if (is_text == true) {}
     });
 
     window.addEventListener("mouseup", function(e) { // キャンバスでなくウィンドウに
@@ -88,8 +105,7 @@ window.addEventListener("load", function() {
         var endX = e.pageX - $('canvas').offset().left - offset;
         var endY = e.pageY - $('canvas').offset().top - offset;
 
-        if (is_text == true) {
-        }
+        if (is_text == true) {}
 
         // get_image = context.getImageData(0, 0, $('canvas').width(), $('canvas').height());
         // flag = false;
