@@ -56,7 +56,7 @@ $(function() {
         return false;
     };
 });
-    
+
 /**
  * 保存処理　(Canvas2Image)
  * http://www.nihilogic.dk/labs/canvas2image/
@@ -105,4 +105,30 @@ function drag(e) {
         context.drawImage(img, 0, 0);
     };
     img.src = blobURL;
+}
+
+
+/**
+ * TODO: リサイズ
+ */
+function resizeCanvas() {
+    // 虫眼鏡
+    var w = 110;
+    var h = 110;
+
+    // 描画用canvas
+    var canvas = $('#canvas');
+    canvas.attr('width', w);
+    canvas.attr('height', h);
+
+    canvas.width(w);
+    canvas.height(h);
+
+    // 見せかけ
+    var drawing = $('#drawing');
+    drawing.attr('width', w);
+    drawing.attr('height', h);
+
+    drawing.width(w);
+    drawing.height(h);
 }

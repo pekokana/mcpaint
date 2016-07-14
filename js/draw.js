@@ -6,8 +6,7 @@ var picker;
 const ipcRenderer = require('electron').ipcRenderer;
 window.addEventListener("load", function() {
     // キャンバス
-    var canvas = document.getElementById("canvas");
-
+    // var canvas = document.getElementById("canvas");
     var offset = 5;
     var start_x;
     var start_y;
@@ -270,17 +269,3 @@ window.addEventListener("load", function() {
     // ペースト
     enablePasteForCanvas(canvas);
 }, true);
-
-/**
- * TODO: リサイズ
- */
-function resizeCanvas() {
-    // 虫眼鏡
-    var w = 110;
-    var h = 110;
-    $('#canvas').attr('width', w);
-    $('#canvas').attr('height', h);
-
-    $("#canvas").width(w);
-    $("#canvas").height(h);
-}
