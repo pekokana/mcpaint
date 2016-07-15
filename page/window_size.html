@@ -4,36 +4,29 @@
 <head>
     <meta charset="utf-8">
     <title>MCペイント</title>
-    <script type="text/javascript">
-        var hoge = function() {
-            console.log(1);
-        }
-        document.getElementById('close').addEventListener("onclick", function(e) {
-            console.log(2);
-            var focused_window = BrowserWindow.getFocusedWindow();
-            focused_window.webContents.send('resize-save');
-            window.close();
-        });
-    </script>
 </head>
 
 <body>
     ウィンドウのサイズ変更
-    <!--<form onsubmit="return submit(this)">-->
     <div>
-        x:<input type="text" size="30" name="x"> y:<input type="text" size="40" name="y">
+        x:<input type="text" size="30" id="x" />
     </div>
-    <!--<input type="submit" value="決定">-->
-    <!--</form>-->
-    <input type="button" id="close" value="閉じる">
-    <!--<a id="close" href="javascript:window.close() ">Close this Window</a>-->
+    <div>
+        y:<input type="text" size="30" id="y" />
+    </div>
+    <input type="button" id="close" value="閉じる" />
 </body>
 <script type="text/javascript ">
-    document.getElementById('close').addEventListener("click ", function(e) {
+    var x = document.getElementById('x');
+    var y = document.getElementById('y');
+
+    var close_btn = document.getElementById('close');
+    close_btn.addEventListener("click", function() {
+        alert(x.value + ' ' + y.value);
         window.close();
         // var focused_window = BrowserWindow.getFocusedWindow();
         // focused_window.webContents.send('resize-save');
-    });
+    }, false);
 </script>
 
 </html>
