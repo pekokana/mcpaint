@@ -2,6 +2,12 @@
 
 module.exports = {
     title: "MC Paint",
+    file: "File",
+    edit: "Edit",
+    view: "View",
+    transform: "Transform",
+    color: "Color",
+    help: "Help",
     quit: "Quit",
     copy: "Copy",
     reload: "Reload",

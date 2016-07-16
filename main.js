@@ -64,7 +64,8 @@ app.on('ready', function() {
     });
 
     var template = [{
-        label: 'Electron',
+        // label: 'Electron',
+        label: localize.title,
         submenu: [{
             // label: 'Quit',
             label: localize.quit,
@@ -74,7 +75,8 @@ app.on('ready', function() {
             }
         }, ]
     }, {
-        label: 'File',
+        // label: 'File',
+        label: localize.file,
         submenu: [{
             // label: 'New File',
             label: localize.new_file,
@@ -93,7 +95,8 @@ app.on('ready', function() {
             }
         }]
     }, {
-        label: 'Edit',
+        // label: 'Edit',
+        label: localize.edit,
         submenu: [{
             // label: 'Resize',
             label: localize.resize,
@@ -112,7 +115,8 @@ app.on('ready', function() {
             selector: "paste:"
         }]
     }, {
-        label: 'View',
+        // label: 'View',
+        label: localize.view,
         submenu: [
             {
                 // label: 'Reload',

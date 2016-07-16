@@ -2,6 +2,12 @@
 
 module.exports = {
     title: "MCペイント",
+    file: "ファイル",
+    edit: "編集",
+    view: "表示",
+    transform: "変形",
+    color: "色",
+    help: "ヘルプ",
     quit: "終了",
     copy : "コピー",
     reload: "リロード",
