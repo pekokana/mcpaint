@@ -3,26 +3,48 @@
 
 <head>
     <meta charset="utf-8">
-    <title>MCペイント</title>
+    <!--<title>タイトルは書かないこと</title>-->
 </head>
 
 <body>
-    ウィンドウのサイズ変更
     <div>
-        x:<input type="text" size="30" id="x" />
+        ファイルの最終保存:
     </div>
     <div>
-        y:<input type="text" size="30" id="y" />
+        ディスク上のサイズ:
     </div>
-    <input type="button" id="close" value="閉じる" />
+    <div>
+        解像度:
+    </div>
+    <div>
+        幅:<input type="text" size="30" id="width" />
+    </div>
+    <div>
+        高さ:<input type="text" size="30" id="height" />
+    </div>
+    <input type="button" id="ok" value="OK" />
+    <input type="button" id="cancel" value="キャンセル" />
+    <input type="button" id="normal" value="規定値" />
+
+    単位
+    インチ
+    cm
+    ピクセル
+    色
+    白黒
+    カラー
 </body>
 <script type="text/javascript ">
-    var x = document.getElementById('x');
-    var y = document.getElementById('y');
+    var width = document.getElementById('width');
+    var height = document.getElementById('height');
+    width.value = '1';
+    height.value = '1';
+ 
+    var ok_btn = document.getElementById('ok');
+    var cancel_btn = document.getElementById('cancel');
+    var normal_btn = document.getElementById('normal');
 
-    var close_btn = document.getElementById('close');
-    close_btn.addEventListener("click", function() {
-        alert(x.value + ' ' + y.value);
+    ok_btn.addEventListener("click", function() {
         window.close();
         // var focused_window = BrowserWindow.getFocusedWindow();
         // focused_window.webContents.send('resize-save');
