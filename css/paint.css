@@ -22,6 +22,14 @@ canvas {
     vertical-align: middle;
 }
 
+#background {
+    position: relative;
+    clear: both;
+}
+
+#background img {
+    vertical-align: middle;
+}
 
 /*#save {
 

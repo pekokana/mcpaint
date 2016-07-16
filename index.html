@@ -37,7 +37,9 @@
     <!-- 矩形選択 -->
     <!--<canvas id="display" width="640" height="480"></canvas>-->
     <canvas id="drawing" width="640" height="480"></canvas>
+    <!-- ペースト機能用 -->
     <div id="container"></div>
+
     <script type="text/javascript">
         // var display = document.getElementById("display");
         // 実際
@@ -56,7 +58,6 @@
     </script>
 
     <div id="tools">
-        <!--TODO: 凹むボタンの仕組-->
         <ul class="donate-now">
             <li>
                 <input type="radio" name="brush" id="selection1" checked="checked" />
@@ -133,6 +134,22 @@
             </li>
         </ul>
     </div>
+
+    <br />
+    <!--背景あり・なし-->
+    <div id="background">
+        <ul class="donate-now">
+            <li>
+                <input type="radio" name="bg" id="withback" checked="checked" />
+                <label for="withback"><img src="icon/na.png" alt="背景あり" title="背景あり"></label>
+            </li>
+            <li>
+                <input type="radio" name="bg" id="withoutback" />
+                <label for="withoutback"><img src="icon/na.png" alt="背景なし" title="背景なし"></label>
+            </li>
+        </ul >
+    </div>
+
     <div id="menu">
         <div id="slider"></div>
         <br>
