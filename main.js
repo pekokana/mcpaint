@@ -27,7 +27,8 @@ app.on('window-all-closed', function() {
  */
 function showResize() {
     const windowManager = require('electron-window-manager');
-    var new_win = 'file://' + __dirname + '/page/window_size.html'
+    var new_win = 'file://' + __dirname + '/page/window_size.html';
+    // TODO: ローカライズ
     windowManager.open('Resize', 'キャンバスサイズ変更', new_win);
     var win = windowManager.get('Resize');
 
@@ -98,13 +99,6 @@ app.on('ready', function() {
         // label: 'Edit',
         label: localize.edit,
         submenu: [{
-            // label: 'Resize',
-            label: localize.resize,
-            accelerator: "CmdOrCtrl+E",
-            click: function() {
-                showResize();
-            }
-        }, {
             // label: "Copy",
             label: localize.copy,
             accelerator: "CmdOrCtrl+C",
@@ -141,7 +135,50 @@ app.on('ready', function() {
                 }
             },
         ]
-    }];
+     }, {
+        label: localize.transform,
+        submenu: [ 
+            {
+                label: localize.rotate,
+                accelerator: "CmdOrCtrl+R",
+                click: function() {
+                }
+            }, {
+                label: localize.expansion,
+                accelerator: "CmdOrCtrl+W",
+                click: function() {
+                }
+            }, {
+                label: localize.inverse,
+                accelerator: "CmdOrCtrl+I",
+                click: function() {
+                }
+            }, {
+                label: localize.resize,
+                accelerator: "CmdOrCtrl+E",
+                click: function() {
+                    showResize();
+                }
+            }, {
+                label: localize.all_clear,
+                accelerator: "CmdOrCtrl+Shift+N",
+                click: function() {
+                }
+            }, {
+                label: localize.opaque,
+                // accelerator: "",
+                click: function() {
+                }
+            }, 
+        ]
+     } , {
+        label: localize.color,
+        submenu: [ ]
+     } , {
+        label: localize.help,
+        submenu: [ ]
+     }
+    ];
     // https://pracucci.com/atom-electron-enable-copy-and-paste.html
     // これをするとメニューが上書きされてくれる
     const menu = Menu.buildFromTemplate(template)
