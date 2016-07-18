@@ -22,18 +22,26 @@ app.on('window-all-closed', function() {
         app.quit();
 });
 
+// user_lang のあとに.jsをつけたファイル名が呼ばれる
+try{
+    var localize = require('./localize/' + user_lang + '.js');
+} catch(e) {
+    // ユーザのが存在してなかったら仕方なくデフォルト
+    localize = require('./localize/en-US.js');
+}
+
 /**
  * リサイズ画面
  */
 function showResize() {
     const windowManager = require('electron-window-manager');
     var new_win = 'file://' + __dirname + '/page/window_size.html';
-    // TODO: ローカライズ
-    windowManager.open('Resize', 'キャンバスサイズ変更', new_win);
+    var title_name = localize.resize;
+    windowManager.open('Resize', title_name, new_win);
     var win = windowManager.get('Resize');
 
     // 大きさ変更
-    win.resize(300, 200).restore();
+    win.resize(400, 240).restore();
 }
 
 app.on('ready', function() {
@@ -44,14 +52,6 @@ app.on('ready', function() {
         //=> 'en_US'
         user_lang = locale;
     });
-
-    // user_lang のあとに.jsをつけたファイル名が呼ばれる
-    try{
-        var localize = require('./localize/' + user_lang + '.js');
-    } catch(e) {
-        // ユーザのが存在してなかったら仕方なくデフォルト
-        localize = require('./localize/en-US.js');
-    }
 
     // ブラウザ(Chromium)の起動, 初期画面のロード
     mainWindow = new BrowserWindow({
