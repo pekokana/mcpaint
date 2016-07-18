@@ -42,10 +42,10 @@
                     色
                 </div>
                 <div>
-                    <input type="radio" name="color" id="mono" />
+                    <input type="radio" name="color" id="mono" checked="checked" />
                     <label for="mono">白黒</label>
 
-                    <input type="radio" name="color" id="mono" />
+                    <input type="radio" name="color" id="color" />
                     <label for="mono">カラー</label>
                 </div>
             </td>
@@ -77,6 +77,18 @@
     // キャンセルボタン
     cancel_btn.addEventListener("click", function() {
         window.close();
+    }, false);
+
+    var inch_radio = document.getElementById('inch');
+    var mono_radio = document.getElementById('mono');
+
+    // 規定値ボタン
+    normal_btn.addEventListener("click", function() {
+        inch_radio.checked = true;
+        mono_radio.checked = true;
+
+        width.value = '100';
+        height.value = '100';
     }, false);
 </script>
 
